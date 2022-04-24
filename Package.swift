@@ -15,12 +15,12 @@ let package = Package(
             targets: ["Authorization"]),
     ],
     dependencies: [
-        .package(name: "Module", path: "/Users/armancarhcan/Desktop/Module"),
-        .package(name: "Managers", path: "/Users/armancarhcan/Desktop/Managers"),
-        .package(name: "DesignSystem", path: "/Users/armancarhcan/Desktop/DesignSystem"),
-        .package(name: "AlertManager", path: "/Users/armancarhcan/Desktop/AlertManager"),
-        .package(name: "Utils", path: "/Users/armancarhcan/Desktop/Utils"),
-        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0")
+        .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
+        .package(url: "https://github.com/arman095095/Managers.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/Module.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/AlertManager.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/Utils.git", branch: "develop"),
     ],
     targets: [
         .target(
