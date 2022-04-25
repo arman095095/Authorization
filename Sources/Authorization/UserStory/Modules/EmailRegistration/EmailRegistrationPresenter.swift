@@ -10,9 +10,7 @@ import UIKit
 import Managers
 import AlertManager
 
-protocol EmailRegistrationModuleOutput: AnyObject {
-    func userRegistered()
-}
+protocol EmailRegistrationModuleOutput: AnyObject { }
 
 protocol EmailRegistrationModuleInput: AnyObject { }
 
@@ -65,7 +63,7 @@ extension EmailRegistrationPresenter: EmailRegistrationInteractorOutput {
     func successRegistered() {
         view?.setLoading(on: false)
         alertManager.present(type: .success, title: stringFactory.successRegisteredMessage)
-        output?.userRegistered()
+        router.openAccountCreation()
     }
     
     func failureRegistrationRequest(message: String) {

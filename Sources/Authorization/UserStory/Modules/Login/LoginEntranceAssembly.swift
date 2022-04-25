@@ -17,9 +17,10 @@ typealias LoginEntranceModule = Module<LoginEntranceModuleInput, LoginEntranceMo
 enum LoginEntranceAssembly {
     static func makeModule(credentionalValidator: CredentionalValidatorProtocol,
                            authManager: AuthManagerProtocol,
-                           alertManager: AlertManagerProtocol) -> LoginEntranceModule {
+                           alertManager: AlertManagerProtocol,
+                           routeMap: RouteMapPrivate) -> LoginEntranceModule {
         let view = LoginEntranceViewController()
-        let router = LoginEntranceRouter()
+        let router = LoginEntranceRouter(routeMap: routeMap)
         let interactor = LoginEntranceInteractor(validator: credentionalValidator,
                                                  authManager: authManager)
         let stringFactory = AuthorizationStringFactory()

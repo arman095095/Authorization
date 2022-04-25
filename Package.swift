@@ -21,6 +21,7 @@ let package = Package(
         .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
         .package(url: "https://github.com/arman095095/AlertManager.git", branch: "develop"),
         .package(url: "https://github.com/arman095095/Utils.git", branch: "develop"),
+        .package(url: "https://github.com/arman095095/Account.git", branch: "develop")
     ],
     targets: [
         .target(
@@ -30,7 +31,8 @@ let package = Package(
                            .product(name: "DesignSystem", package: "DesignSystem"),
                            .product(name: "AlertManager", package: "AlertManager"),
                            .product(name: "Utils", package: "Utils"),
-                           .product(name: "Swinject", package: "Swinject")
+                           .product(name: "Swinject", package: "Swinject"),
+                           .product(name: "Account", package: "Account")
             ]),
     ]
 )

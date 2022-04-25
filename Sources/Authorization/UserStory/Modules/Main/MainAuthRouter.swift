@@ -26,20 +26,20 @@ final class MainAuthRouter {
 extension MainAuthRouter: MainAuthRouterInput {
     func openLoginEntrance() {
         let module = routeMap.loginEntranceModule()
-        self.push(module)
+        self.push(module.view)
     }
     
     func openEmailRegistration() {
         let module = routeMap.emailRegistrationModule()
-        self.push(module)
+        self.push(module.view)
     }
 }
 
 private extension MainAuthRouter {
-    func push(_ module: ModuleProtocol) {
+    func push(_ view: UIViewController) {
         let transition = PushTransition()
         transition.source = transitionHandler
-        transition.destination = module.view
+        transition.destination = view
         transition.perform(nil)
     }
 }

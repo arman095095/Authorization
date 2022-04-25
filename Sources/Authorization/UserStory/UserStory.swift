@@ -12,9 +12,10 @@ import Utils
 import Managers
 import AlertManager
 import NetworkServices
+import Account
 
 public protocol AuthorizationRouteMap: AnyObject {
-    func rootModule() -> ModuleProtocol
+    func rootModule() -> AuthorizationModule
 }
 
 public final class AuthorizationUserStory {
@@ -26,7 +27,7 @@ public final class AuthorizationUserStory {
 }
 
 extension AuthorizationUserStory: AuthorizationRouteMap {
-    public func rootModule() -> ModuleProtocol {
+    public func rootModule() -> AuthorizationModule {
         let module = RootModuleWrapperAssembly.makeModule(routeMap: self)
         outputWrapper = module.input as? RootModuleWrapper
         return module
@@ -34,6 +35,13 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 }
 
 extension AuthorizationUserStory: RouteMapPrivate {
+
+    func createProfileModule() -> AccountModule {
+        let module = AccountUserStory(container: container).createAccountModule()
+        module.output = outputWrapper
+        return module
+    }
+    
     func loginEntranceModule() -> LoginEntranceModule {
         let safeResolver = container.synchronize()
         guard let credentionalValidator = safeResolver.resolve(CredentionalValidatorProtocol.self),
@@ -41,8 +49,9 @@ extension AuthorizationUserStory: RouteMapPrivate {
               let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription) }
         let module = LoginEntranceAssembly.makeModule(credentionalValidator: credentionalValidator,
                                                       authManager: authManager,
-                                                      alertManager: alertManager)
-        module._output = outputWrapper
+                                                      alertManager: alertManager,
+                                                      routeMap: self)
+        module.output = outputWrapper
         return module
     }
     
@@ -53,14 +62,15 @@ extension AuthorizationUserStory: RouteMapPrivate {
               let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription) }
         let module = EmailRegistrationAssembly.makeModule(authManager: authManager,
                                                           credentionalValidator: credentionalValidator,
-                                                          alertManager: alertManager)
-        module._output = outputWrapper
+                                                          alertManager: alertManager,
+                                                          routeMap: self)
+        module.output = outputWrapper
         return module
     }
     
     func mainAuthModule() -> MainAuthModule {
         let module = MainAuthAssembly.makeModule(routeMap: self)
-        module._output = outputWrapper
+        module.output = outputWrapper
         return module
     }
 }

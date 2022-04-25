@@ -6,9 +6,11 @@
 //
 
 import Foundation
+import Account
 
 protocol RouteMapPrivate: AnyObject {
     func loginEntranceModule() -> LoginEntranceModule
     func emailRegistrationModule() -> EmailRegistrationModule
     func mainAuthModule() -> MainAuthModule
+    func createProfileModule() -> AccountModule
 }

@@ -17,9 +17,10 @@ typealias EmailRegistrationModule = Module<EmailRegistrationModuleInput, EmailRe
 enum EmailRegistrationAssembly {
     static func makeModule(authManager: AuthManagerProtocol,
                            credentionalValidator: CredentionalValidatorProtocol,
-                           alertManager: AlertManagerProtocol) -> EmailRegistrationModule {
+                           alertManager: AlertManagerProtocol,
+                           routeMap: RouteMapPrivate) -> EmailRegistrationModule {
         let view = EmailRegistrationViewController()
-        let router = EmailRegistrationRouter()
+        let router = EmailRegistrationRouter(routeMap: routeMap)
         let interactor = EmailRegistrationInteractor(authManager: authManager,
                                                      validator: credentionalValidator)
         let stringFactory = AuthorizationStringFactory()

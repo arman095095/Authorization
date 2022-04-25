@@ -12,7 +12,6 @@ import AlertManager
 
 protocol LoginEntranceModuleOutput: AnyObject {
     func userAuthorized()
-    func userNotExist()
 }
 
 protocol LoginEntranceModuleInput: AnyObject {
@@ -66,7 +65,7 @@ extension LoginEntrancePresenter: LoginEntranceInteractorOutput {
     
     func responsedEmptyProfile() {
         view?.setLoading(on: false)
-        output?.userNotExist()
+        router.openAccountCreation()
     }
     
     func successRecovered() {

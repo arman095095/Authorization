@@ -8,15 +8,14 @@
 import Foundation
 import UIKit
 import Module
+import Account
 
 public protocol AuthorizationModuleInput: AnyObject {
     
 }
 
 public protocol AuthorizationModuleOutput: AnyObject {
-    func userRegistered()
     func userAuthorized()
-    func userNotExist()
 }
 
 final class RootModuleWrapper {
@@ -39,20 +38,14 @@ extension RootModuleWrapper: AuthorizationModuleInput {
     
 }
 
-extension RootModuleWrapper: EmailRegistrationModuleOutput {
-    func userRegistered() {
-        output?.userRegistered()
-    }
-}
-
 extension RootModuleWrapper: LoginEntranceModuleOutput {
     func userAuthorized() {
         output?.userAuthorized()
     }
-    
-    func userNotExist() {
-        output?.userNotExist()
-    }
 }
 
 extension RootModuleWrapper: MainAuthModuleOutput { }
+
+extension RootModuleWrapper: EmailRegistrationModuleOutput { }
+
+extension RootModuleWrapper: AccountModuleOutput { }

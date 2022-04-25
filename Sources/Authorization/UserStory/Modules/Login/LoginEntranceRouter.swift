@@ -10,6 +10,7 @@ import UIKit
 
 protocol LoginEntranceRouterInput: AnyObject {
     func showRemovedAttention()
+    func openAccountCreation()
 }
 
 protocol LoginEntranceRouterOutput: AnyObject {
@@ -20,9 +21,19 @@ protocol LoginEntranceRouterOutput: AnyObject {
 final class LoginEntranceRouter {
     weak var transitionHandler: UIViewController?
     weak var output: LoginEntranceRouterOutput?
+    private let routeMap: RouteMapPrivate
+    
+    init(routeMap: RouteMapPrivate) {
+        self.routeMap = routeMap
+    }
 }
 
 extension LoginEntranceRouter: LoginEntranceRouterInput {
+
+    func openAccountCreation() {
+        let module = routeMap.createProfileModule()
+        transitionHandler?.navigationController?.pushViewController(module.view, animated: true)
+    }
 
     func showRemovedAttention() {
         DispatchQueue.main.async {

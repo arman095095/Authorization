@@ -5,8 +5,26 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/abseil-cpp-SwiftPM.git",
       "state" : {
-        "revision" : "fffc3c2729be5747390ad02d5100291a0d9ad26a",
-        "version" : "0.20200225.4"
+        "revision" : "d302de612e3d57c6f4afaf087da18fba8eac72a7",
+        "version" : "0.20220203.1"
+      }
+    },
+    {
+      "identity" : "account",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/Account.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "8a639f3d4f4d097088f09086103e357ce785f2b6"
+      }
+    },
+    {
+      "identity" : "alertmanager",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/AlertManager.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "13e9596e6068f19ef980d046dae92d9ba9480baf"
       }
     },
     {
@@ -14,8 +32,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/boringssl-SwiftPM.git",
       "state" : {
-        "revision" : "734a8247442fde37df4364c21f6a0085b6a36728",
-        "version" : "0.7.2"
+        "revision" : "79db6516894a932d0ddaff3b05b9da1e4f6c4069",
+        "version" : "0.9.0"
+      }
+    },
+    {
+      "identity" : "designsystem",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/DesignSystem.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "c5588e2cc7e060b93b34f60ba4e5242bb77ada14"
       }
     },
     {
@@ -23,8 +50,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/firebase-ios-sdk.git",
       "state" : {
-        "revision" : "ccb2bccb82e62ad9e8a4e757a43ce6a04ceae1c9",
-        "version" : "8.14.0"
+        "revision" : "111d8d6ad1a1afd6c8e9561d26e55ab1e74fcb42",
+        "version" : "8.15.0"
       }
     },
     {
@@ -32,8 +59,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleAppMeasurement.git",
       "state" : {
-        "revision" : "9b74e6a3f875208c04c22b39b580a21d4de0f4f9",
-        "version" : "8.14.0"
+        "revision" : "ef819db8c58657a6ca367322e73f3b6322afe0a2",
+        "version" : "8.15.0"
       }
     },
     {
@@ -55,12 +82,12 @@
       }
     },
     {
-      "identity" : "grpc-swiftpm",
+      "identity" : "grpc-ios",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/firebase/grpc-SwiftPM.git",
+      "location" : "https://github.com/grpc/grpc-ios.git",
       "state" : {
-        "revision" : "fb405dd2c7901485f7e158b24e3a0a47e4efd8b5",
-        "version" : "1.28.4"
+        "revision" : "abd2d5a4347efa0454606a788678a5d8ec223738",
+        "version" : "1.44.0-grpc"
       }
     },
     {
@@ -82,12 +109,39 @@
       }
     },
     {
+      "identity" : "managers",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/Managers.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "f71be1821f72854fe2615c64a3c9007970a2af64"
+      }
+    },
+    {
+      "identity" : "module",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/Module.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "98049b3f7a6d8667076fe53e650dadcd4f9ff8da"
+      }
+    },
+    {
       "identity" : "nanopb",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/firebase/nanopb.git",
       "state" : {
         "revision" : "7ee9ef9f627d85cbe1b8c4f49a3ed26eed216c77",
         "version" : "2.30908.0"
+      }
+    },
+    {
+      "identity" : "networkservices",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/NetworkServices.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "ff40042f29d8e6c36a99c01fbf673fe47060e6e9"
       }
     },
     {
@@ -106,6 +160,15 @@
       "state" : {
         "revision" : "2e63d0061da449ad0ed130768d05dceb1496de44",
         "version" : "5.12.5"
+      }
+    },
+    {
+      "identity" : "selection",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/Selection.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "8c2f7502e6efac4bdfb9e1dec1613f2d9b94cdc4"
       }
     },
     {
@@ -142,6 +205,15 @@
       "state" : {
         "revision" : "f10b6e9ebff440f985c43008f7c2d097639fcb81",
         "version" : "2.8.1"
+      }
+    },
+    {
+      "identity" : "utils",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/arman095095/Utils.git",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "aa710df99ecc073f48fa2463c674cab8a24cf441"
       }
     }
   ],
