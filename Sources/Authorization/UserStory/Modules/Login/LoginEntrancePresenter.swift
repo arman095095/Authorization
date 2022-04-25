@@ -11,7 +11,7 @@ import Managers
 import AlertManager
 
 protocol LoginEntranceModuleOutput: AnyObject {
-    func userAuthorized()
+    func userSuccessAuthorized()
 }
 
 protocol LoginEntranceModuleInput: AnyObject {
@@ -60,7 +60,7 @@ extension LoginEntrancePresenter: LoginEntranceInteractorOutput {
     func successAuthorized() {
         view?.setLoading(on: false)
         alertManager.present(type: .success, title: stringFactory.successAuthorizedMessage)
-        output?.userAuthorized()
+        output?.userSuccessAuthorized()
     }
     
     func responsedEmptyProfile() {
@@ -71,7 +71,7 @@ extension LoginEntrancePresenter: LoginEntranceInteractorOutput {
     func successRecovered() {
         view?.setLoading(on: false)
         alertManager.present(type: .success, title: stringFactory.successRecoveredMessage)
-        output?.userAuthorized()
+        output?.userSuccessAuthorized()
     }
     
     func responsedProfileRemoved() {

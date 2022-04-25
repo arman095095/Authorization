@@ -38,8 +38,9 @@ extension RootModuleWrapper: AuthorizationModuleInput {
     
 }
 
-extension RootModuleWrapper: LoginEntranceModuleOutput {
-    func userAuthorized() {
+extension RootModuleWrapper: LoginEntranceModuleOutput,
+                             AccountModuleOutput {
+    func userSuccessAuthorized() {
         output?.userAuthorized()
     }
 }
