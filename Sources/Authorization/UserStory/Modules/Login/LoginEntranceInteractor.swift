@@ -16,7 +16,7 @@ protocol LoginEntranceInteractorInput: AnyObject {
 }
 
 protocol LoginEntranceInteractorOutput: AnyObject {
-    func successAuthorized()
+    func successAuthorized(account: AccountModelProtocol)
     func failureAuthorized(message: String)
     func responsedEmptyProfile()
     func successValidated(email: String, password: String)
@@ -41,8 +41,8 @@ extension LoginEntranceInteractor: LoginEntranceInteractorInput {
     func requestLogin(email: String, password: String) {
         authManager.login(email: email, password: password) { [weak self] result in
             switch result {
-            case .success:
-                self?.output?.successAuthorized()
+            case .success(let account):
+                self?.output?.successAuthorized(account: account)
             case .failure(let error):
                 switch error {
                 case .another(error: let error):

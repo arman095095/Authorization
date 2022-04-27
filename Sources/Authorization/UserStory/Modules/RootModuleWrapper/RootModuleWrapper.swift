@@ -9,13 +9,14 @@ import Foundation
 import UIKit
 import Module
 import Account
+import Managers
 
 public protocol AuthorizationModuleInput: AnyObject {
     
 }
 
 public protocol AuthorizationModuleOutput: AnyObject {
-    func userAuthorized()
+    func userAuthorized(userID: String, account: AccountModelProtocol)
 }
 
 final class RootModuleWrapper {
@@ -40,8 +41,8 @@ extension RootModuleWrapper: AuthorizationModuleInput {
 
 extension RootModuleWrapper: LoginEntranceModuleOutput,
                              AccountModuleOutput {
-    func userSuccessAuthorized() {
-        output?.userAuthorized()
+    func userSuccessAuthorized(userID: String, account: AccountModelProtocol) {
+        output?.userAuthorized(userID: userID, account: account)
     }
 }
 
