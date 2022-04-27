@@ -16,7 +16,9 @@ protocol EmailRegistrationModuleInput: AnyObject { }
 
 protocol EmailRegistrationViewOutput: AnyObject {
     func viewDidLoad()
-    func register(email: String?, password: String?, confirmPassword: String?)
+    func register(email: String?,
+                  password: String?,
+                  confirmPassword: String?)
 }
 
 final class EmailRegistrationPresenter {
@@ -44,7 +46,9 @@ extension EmailRegistrationPresenter: EmailRegistrationViewOutput {
         view?.setupInitialState(stringFactory: stringFactory)
     }
     
-    func register(email: String?, password: String?, confirmPassword: String?) {
+    func register(email: String?,
+                  password: String?,
+                  confirmPassword: String?) {
         view?.setLoading(on: true)
         interactor.validate(email: email, password: password, confirm: confirmPassword)
     }

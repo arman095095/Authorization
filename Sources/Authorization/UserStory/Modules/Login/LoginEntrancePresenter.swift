@@ -68,17 +68,6 @@ extension LoginEntrancePresenter: LoginEntranceInteractorOutput {
         router.openAccountCreation()
     }
     
-    func successRecovered() {
-        view?.setLoading(on: false)
-        alertManager.present(type: .success, title: stringFactory.successRecoveredMessage)
-        output?.userSuccessAuthorized()
-    }
-    
-    func responsedProfileRemoved() {
-        view?.setLoading(on: false)
-        router.showRemovedAttention()
-    }
-    
     func failureAuthorized(message: String) {
         view?.setLoading(on: false)
         alertManager.present(type: .error, title: message)
@@ -91,18 +80,6 @@ extension LoginEntrancePresenter: LoginEntranceInteractorOutput {
     func failureValidated(message: String) {
         view?.setLoading(on: false)
         alertManager.present(type: .error, title: message)
-    }
-}
-
-extension LoginEntrancePresenter: LoginEntranceRouterOutput {
-
-    func acceptToRecover() {
-        view?.setLoading(on: true)
-        interactor.requestRecover()
-    }
-    
-    func denyToRecover() {
-        interactor.logout()
     }
 }
 

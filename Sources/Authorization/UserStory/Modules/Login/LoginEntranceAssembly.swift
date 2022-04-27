@@ -28,7 +28,6 @@ enum LoginEntranceAssembly {
                                                interactor: interactor,
                                                alertManager: alertManager,
                                                stringFactory: stringFactory)
-        router.output = presenter
         view.output = presenter
         interactor.output = presenter
         presenter.view = view
