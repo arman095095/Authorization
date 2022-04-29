@@ -16,7 +16,7 @@ public protocol AuthorizationModuleInput: AnyObject {
 }
 
 public protocol AuthorizationModuleOutput: AnyObject {
-    func userAuthorized(userID: String, account: AccountModelProtocol)
+    func userAuthorized(account: AccountModelProtocol)
 }
 
 final class RootModuleWrapper {
@@ -41,8 +41,9 @@ extension RootModuleWrapper: AuthorizationModuleInput {
 
 extension RootModuleWrapper: LoginEntranceModuleOutput,
                              AccountModuleOutput {
-    func userSuccessAuthorized(userID: String, account: AccountModelProtocol) {
-        output?.userAuthorized(userID: userID, account: account)
+    
+    func userSuccessAuthorized(account: AccountModelProtocol) {
+        output?.userAuthorized(account: account)
     }
 }
 
