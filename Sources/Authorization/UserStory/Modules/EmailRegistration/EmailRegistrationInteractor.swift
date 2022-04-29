@@ -45,22 +45,22 @@ extension EmailRegistrationInteractor: EmailRegistrationInteractorInput {
         guard let email = email,
               let password = password,
               let confirmPassword = confirm else {
-            output?.failureValidated(message: CredentionalValidator.Error.notFilled.localizedDescription)
+            output?.failureValidated(message: ValidationError.Credentionals.notFilled.localizedDescription)
             return
         }
         guard validator.checkEmptyRegistration(email: email,
                                                password: password,
                                                confirmPassword: confirmPassword) else {
-            output?.failureValidated(message: CredentionalValidator.Error.notFilled.localizedDescription)
+            output?.failureValidated(message: ValidationError.Credentionals.notFilled.localizedDescription)
             return
         }
         guard validator.mailCorrectFormat(email) else {
-            output?.failureValidated(message: CredentionalValidator.Error.invalidEmail.localizedDescription)
+            output?.failureValidated(message: ValidationError.Credentionals.invalidEmail.localizedDescription)
             return
         }
         guard validator.passwordsMatches(password: password,
                                          confirmed: confirmPassword) else {
-            output?.failureValidated(message: CredentionalValidator.Error.passwordsNotMatched.localizedDescription)
+            output?.failureValidated(message: ValidationError.Credentionals.passwordsNotMatched.localizedDescription)
             return
         }
         output?.successValidated(email: email, password: password)

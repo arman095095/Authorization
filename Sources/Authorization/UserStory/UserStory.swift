@@ -37,7 +37,6 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 extension AuthorizationUserStory: RouteMapPrivate {
 
     func createProfileModule() -> AccountModule {
-        AccountUserStoryAssembly.assemble(container: container)
         let module = AccountUserStory(container: container).createAccountModule()
         module.output = outputWrapper
         return module
