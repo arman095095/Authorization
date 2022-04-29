@@ -17,10 +17,5 @@ import Managers
 
 public final class AuthorizationUserStoryAssembly: Assembly {
     public init() { }
-    public func assemble(container: Container) {
-        AuthManagerAssembly().assemble(container: container)
-        container.register(CredentionalValidatorProtocol.self) { r in
-            CredentionalValidator()
-        }
-    }
+    public func assemble(container: Container) { }
 }
