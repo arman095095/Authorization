@@ -15,9 +15,10 @@ import FirebaseFirestore
 import FirebaseStorage
 import Managers
 
-public final class AuthorizationUserStoryAssembly {
-    public static func assemble(container: Container) {
-        AuthManagerAssembly.assemble(container: container)
+public final class AuthorizationUserStoryAssembly: Assembly {
+    public init() { }
+    public func assemble(container: Container) {
+        AuthManagerAssembly().assemble(container: container)
         container.register(CredentionalValidatorProtocol.self) { r in
             CredentionalValidator()
         }
