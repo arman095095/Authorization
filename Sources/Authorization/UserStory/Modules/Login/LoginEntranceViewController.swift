@@ -20,10 +20,7 @@ final class LoginEntranceViewController: UIViewController {
     private let contentView = UIView()
     private var loginStack = UIStackView()
     private let helloLabel = UILabel()
-    private let loginButton = LoadButton(backgroundColor: .buttonDark(),
-                                         titleColor: .white,
-                                         height: Constants.largeButtonHeight,
-                                         activityColor: .white)
+    private let loginButton = ButtonsFactory.blackLoadButton
     private let emailTextField = UITextField()
     private let emailLabel = UILabel()
     private let passwordTextField = UITextField()

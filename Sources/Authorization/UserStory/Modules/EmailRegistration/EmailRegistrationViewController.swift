@@ -20,10 +20,7 @@ final class EmailRegistrationViewController: UIViewController {
     private let contentView = UIView()
     private var signUpStack = UIStackView()
     private let helloLabel = UILabel()
-    private let signUpButton = LoadButton(backgroundColor: .buttonDark(),
-                                          titleColor: .white,
-                                          height: Constants.largeButtonHeight,
-                                          activityColor: .white)
+    private let signUpButton = ButtonsFactory.blackLoadButton
     private let emailTextField = UITextField()
     private let emailLabel = UILabel()
     private let passwordTextField = UITextField()

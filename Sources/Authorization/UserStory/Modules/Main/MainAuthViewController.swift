@@ -17,13 +17,8 @@ final class MainAuthViewController: UIViewController {
     var output: MainAuthViewOutput?
     private let emailLabel = UILabel()
     private let loginLabel = UILabel()
-    private let emailButton = UIButton(backgroundColor: .buttonDark(),
-                                       titleColor: .white,
-                                       height: Constants.largeButtonHeight)
-    private let loginButton = UIButton(backgroundColor: .white,
-                                       titleColor: .buttonRed(),
-                                       shadow: true,
-                                       height: Constants.largeButtonHeight)
+    private let emailButton = ButtonsFactory.blackDefaultButton
+    private let loginButton = ButtonsFactory.whiteDefaultButton
     private let logo = UIImageView()
     
     override func viewDidLoad() {
