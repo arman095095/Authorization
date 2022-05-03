@@ -52,7 +52,7 @@ private extension LoginEntranceViewController {
     
     func setupViews(stringFactory: LoginStringFactoryProtocol) {
         helloLabel.text = stringFactory.gladToSeeTitle
-        loginButton.setTitle(stringFactory.loginTitle)
+        loginButton.setTitle(stringFactory.loginTitle, for: .normal)
         emailLabel.text = stringFactory.emailTitle
         passwordLabel.text = stringFactory.passwordTitle
         helloLabel.font = UIFont.avenir26()

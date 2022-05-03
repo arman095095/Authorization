@@ -55,7 +55,7 @@ private extension EmailRegistrationViewController {
     func setupViews(stringFactory: EmailRegistrationStringFactoryProtocol) {
         helloLabel.font = UIFont.avenir26()
         helloLabel.text = stringFactory.greatingTitle
-        signUpButton.setTitle(stringFactory.registrationTitle)
+        signUpButton.setTitle(stringFactory.registrationTitle, for: .normal)
         emailLabel.text = stringFactory.emailTitle
         passwordLabel.text = stringFactory.passwordTitle
         confirmPasswordLabel.text = stringFactory.passwordConfirmationTitle
