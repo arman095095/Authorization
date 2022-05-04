@@ -7,8 +7,7 @@
 
 import Foundation
 import Module
-
-public typealias AuthorizationModule = Module<AuthorizationModuleInput, AuthorizationModuleOutput>
+import AuthorizationRouteMap
 
 enum RootModuleWrapperAssembly {
     static func makeModule(routeMap: RouteMapPrivate) -> AuthorizationModule {

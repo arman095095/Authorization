@@ -9,6 +9,7 @@
 import UIKit
 import Managers
 import AlertManager
+import ModelInterfaces
 
 protocol LoginEntranceModuleOutput: AnyObject {
     func userSuccessAuthorized(account: AccountModelProtocol)

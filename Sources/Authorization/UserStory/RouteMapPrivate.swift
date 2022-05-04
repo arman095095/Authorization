@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import Account
+import AccountRouteMap
 
 protocol RouteMapPrivate: AnyObject {
     func loginEntranceModule() -> LoginEntranceModule

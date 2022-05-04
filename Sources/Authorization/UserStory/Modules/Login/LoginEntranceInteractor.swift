@@ -9,6 +9,7 @@
 import UIKit
 import Managers
 import Utils
+import ModelInterfaces
 
 protocol LoginEntranceInteractorInput: AnyObject {
     func requestLogin(email: String, password: String)

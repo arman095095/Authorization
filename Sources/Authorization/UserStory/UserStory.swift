@@ -12,11 +12,9 @@ import Utils
 import Managers
 import AlertManager
 import NetworkServices
-import Account
-
-public protocol AuthorizationRouteMap: AnyObject {
-    func rootModule() -> AuthorizationModule
-}
+import AuthorizationRouteMap
+import AccountRouteMap
+import UserStoryFacade
 
 public final class AuthorizationUserStory {
     private let container: Container
@@ -37,7 +35,9 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 extension AuthorizationUserStory: RouteMapPrivate {
 
     func createProfileModule() -> AccountModule {
-        let module = AccountUserStory(container: container).createAccountModule()
+        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.accountUserStory?.createAccountModule() else {
+            fatalError(ErrorMessage.dependency.localizedDescription)
+        }
         module.output = outputWrapper
         return module
     }

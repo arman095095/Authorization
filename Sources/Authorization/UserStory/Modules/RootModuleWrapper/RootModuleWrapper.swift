@@ -8,16 +8,9 @@
 import Foundation
 import UIKit
 import Module
-import Account
-import Managers
-
-public protocol AuthorizationModuleInput: AnyObject {
-    
-}
-
-public protocol AuthorizationModuleOutput: AnyObject {
-    func userAuthorized(account: AccountModelProtocol)
-}
+import ModelInterfaces
+import AuthorizationRouteMap
+import AccountRouteMap
 
 final class RootModuleWrapper {
 
