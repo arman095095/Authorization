@@ -35,7 +35,7 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 extension AuthorizationUserStory: RouteMapPrivate {
 
     func createProfileModule() -> AccountModule {
-        guard let module = container.synchronize().resolve(UserStoryFacade.self)?.accountUserStory?.createAccountModule() else {
+        guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.accountUserStory?.createAccountModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)
         }
         module.output = outputWrapper

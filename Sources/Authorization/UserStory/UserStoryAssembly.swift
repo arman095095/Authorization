@@ -14,8 +14,14 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 import Managers
+import AuthorizationRouteMap
+import UserStoryFacade
 
 public final class AuthorizationUserStoryAssembly: Assembly {
     public init() { }
-    public func assemble(container: Container) { }
+    public func assemble(container: Container) {
+        container.register(AuthorizationRouteMap.self) { r in
+            AuthorizationUserStory(container: container)
+        }
+    }
 }
