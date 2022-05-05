@@ -42,7 +42,7 @@ private extension MainAuthViewController {
         loginLabel.text = stringFactory.alreadyRegisteredTitle
         emailButton.setTitle(stringFactory.emailTitle, for: .normal)
         loginButton.setTitle(stringFactory.loginTitle, for: .normal)
-        logo.image = UIImage(named: stringFactory.logoImageName)
+        logo.image = UIImage(named: stringFactory.logoImageName, in: Bundle.module, compatibleWith: nil)
         self.view.backgroundColor = .white
         logo.contentMode = .scaleAspectFit
         logo.translatesAutoresizingMaskIntoConstraints = false
