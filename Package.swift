@@ -3,28 +3,30 @@
 
 import PackageDescription
 
+private var dependencies: [Package.Dependency] = [.package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0")]
+
 private let remoteDependencies: [Package.Dependency] = [
-    .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
     .package(url: "https://github.com/arman095095/Managers.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/Module.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/DesignSystem.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/AlertManager.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/Utils.git", branch: "develop"),
-    .package(url: "https://github.com/arman095095/Account.git", branch: "develop")
+    .package(url: "https://github.com/arman095095/AccountRouteMap.git", branch: "develop"),
+    .package(url: "https://github.com/arman095095/UserStoryFacade.git", branch: "develop")
 ]
 
 private let localDependencies: [Package.Dependency] = [
-    .package(url: "https://github.com/Swinject/Swinject.git", from: "2.8.0"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/Managers"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/Module"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/DesignSystem"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/AlertManager"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/Utils"),
-    .package(path: "/Users/armancarhcan/Desktop/Workdir/Account")
+    .package(path: "../Managers"),
+    .package(path: "../Module"),
+    .package(path: "../DesignSystem"),
+    .package(path: "../AlertManager"),
+    .package(path: "../Utils"),
+    .package(path: "../AccountRouteMap"),
+    .package(path: "../UserStoryFacade")
 ]
 
 let isDev = true
-private let dependencies = isDev ? localDependencies : remoteDependencies
+isDev ? dependencies.append(contentsOf: localDependencies) : dependencies.append(contentsOf: remoteDependencies)
 
 let package = Package(
     name: "Authorization",
@@ -47,7 +49,8 @@ let package = Package(
                            .product(name: "AlertManager", package: "AlertManager"),
                            .product(name: "Utils", package: "Utils"),
                            .product(name: "Swinject", package: "Swinject"),
-                           .product(name: "Account", package: "Account")
+                           .product(name: "AccountRouteMap", package: "AccountRouteMap"),
+                           .product(name: "UserStoryFacade", package: "UserStoryFacade")
             ]),
     ]
 )
