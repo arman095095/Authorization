@@ -15,7 +15,7 @@
       "location" : "https://github.com/arman095095/AccountRouteMap.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "6bf15f70d1ee79166322d551bb66f9f7543b5378"
+        "revision" : "353d7347778a07c9f706f2abd6f1e686c26cb489"
       }
     },
     {
@@ -42,7 +42,7 @@
       "location" : "https://github.com/arman095095/AuthorizedZoneRouteMap.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "84473ab8f4f0593595d02bf6dad6b12b0dc75bba"
+        "revision" : "1a36da3982b9d149ba4bca9607ea3fae209d1946"
       }
     },
     {
@@ -60,7 +60,7 @@
       "location" : "https://github.com/arman095095/DesignSystem.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "687d7c82e83da24c308e35244fb50637d5539217"
+        "revision" : "3a9693371be522dfe41850ec6088fdf604a93192"
       }
     },
     {
@@ -86,8 +86,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/google/GoogleDataTransport.git",
       "state" : {
-        "revision" : "15ccdfd25ac55b9239b82809531ff26605e7556e",
-        "version" : "9.1.2"
+        "revision" : "b905c49326b72211531ed9d7baa02d724828a8dc",
+        "version" : "9.1.4"
       }
     },
     {
@@ -132,7 +132,7 @@
       "location" : "https://github.com/arman095095/Managers.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "aab8babd0109720f5add99e2f34eb80643881510"
+        "revision" : "6fae37be2160e061d5563e41114f2608a60257fa"
       }
     },
     {
@@ -141,7 +141,7 @@
       "location" : "https://github.com/arman095095/ModelInterfaces.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "301b392650aa5d8ae032483760eab95ee267d1ff"
+        "revision" : "2812afc016a1afa7ec46356b5bf9b7e22dbb5f30"
       }
     },
     {
@@ -168,7 +168,7 @@
       "location" : "https://github.com/arman095095/NetworkServices.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "c7a500ada9493d168a03e1e91eab85de12b41e5a"
+        "revision" : "f8ab65fd6c494ee4035ae0c4add0db54ab53487a"
       }
     },
     {
@@ -177,7 +177,7 @@
       "location" : "https://github.com/arman095095/PostsRouteMap.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "726fe75504995a1f06f2ad2d2e824792044aacf8"
+        "revision" : "d5aa4d1dde6968b4d0773228e14e08bdbb3df5b7"
       }
     },
     {
@@ -186,7 +186,7 @@
       "location" : "https://github.com/arman095095/ProfileRouteMap.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "e93fc916c694a8ce27852fd7be4687e903d856a7"
+        "revision" : "47ce5642cbf2f4fd30af33e7a26a2064799d29cb"
       }
     },
     {
@@ -196,15 +196,6 @@
       "state" : {
         "revision" : "46c1e6b5ac09d8f82c991061c659f67e573d425d",
         "version" : "2.1.0"
-      }
-    },
-    {
-      "identity" : "sdwebimage",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImage.git",
-      "state" : {
-        "revision" : "2e63d0061da449ad0ed130768d05dceb1496de44",
-        "version" : "5.12.5"
       }
     },
     {
@@ -222,7 +213,7 @@
       "location" : "https://github.com/arman095095/SettingsRouteMap.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "360a66995b5c9219e352ce8248d61ce33a2b15a9"
+        "revision" : "b77d3abd2ea9d7f1fdcce57ef36c1254bdfa1bcb"
       }
     },
     {
@@ -276,7 +267,7 @@
       "location" : "https://github.com/arman095095/Utils.git",
       "state" : {
         "branch" : "develop",
-        "revision" : "611eb753336c8440f054a949b34df285c73a49be"
+        "revision" : "a35a998963d8bda712c434ffdbb5a7e573300d5e"
       }
     }
   ],

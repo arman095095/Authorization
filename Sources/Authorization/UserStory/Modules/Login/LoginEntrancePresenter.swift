@@ -12,7 +12,7 @@ import AlertManager
 import ModelInterfaces
 
 protocol LoginEntranceModuleOutput: AnyObject {
-    func userSuccessAuthorized(account: AccountModelProtocol)
+    func userAuthorized(account: AccountModelProtocol)
 }
 
 protocol LoginEntranceModuleInput: AnyObject {
@@ -61,7 +61,7 @@ extension LoginEntrancePresenter: LoginEntranceInteractorOutput {
     func successAuthorized(account: AccountModelProtocol) {
         view?.setLoading(on: false)
         alertManager.present(type: .success, title: stringFactory.successAuthorizedMessage)
-        output?.userSuccessAuthorized(account: account)
+        output?.userAuthorized(account: account)
     }
     
     func responsedEmptyProfile() {

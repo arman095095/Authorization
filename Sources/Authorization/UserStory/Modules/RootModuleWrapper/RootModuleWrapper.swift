@@ -34,8 +34,14 @@ extension RootModuleWrapper: AuthorizationModuleInput {
 
 extension RootModuleWrapper: LoginEntranceModuleOutput,
                              AccountModuleOutput {
+
+    func userSuccessCreated(account: AccountModelProtocol) {
+        output?.userAuthorized(account: account)
+    }
     
-    func userSuccessAuthorized(account: AccountModelProtocol) {
+    func userSuccessEdited() { }
+    
+    func userAuthorized(account: AccountModelProtocol) {
         output?.userAuthorized(account: account)
     }
 }
