@@ -28,7 +28,8 @@ public final class AuthManagerAssembly: Assembly {
                                remoteStorage: remoteStorage,
                                quickAccessManager: quickAccessManager,
                                profileService: profileService,
-                               requestsService: requestsService)
+                               requestsService: requestsService,
+                               container: container)
         }.inObjectScope(.weak)
     }
 }
