@@ -9,7 +9,6 @@ import Foundation
 import Swinject
 import Module
 import Utils
-import Managers
 import AlertManager
 import NetworkServices
 import AuthorizationRouteMap
@@ -73,8 +72,4 @@ extension AuthorizationUserStory: RouteMapPrivate {
         module.output = outputWrapper
         return module
     }
-}
-
-enum ErrorMessage: LocalizedError {
-    case dependency
 }

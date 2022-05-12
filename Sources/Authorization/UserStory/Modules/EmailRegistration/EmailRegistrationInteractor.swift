@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Managers
 import Utils
 
 protocol EmailRegistrationInteractorInput: AnyObject {

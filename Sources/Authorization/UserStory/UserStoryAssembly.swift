@@ -13,7 +13,6 @@ import AlertManager
 import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
-import Managers
 import AuthorizationRouteMap
 import UserStoryFacade
 

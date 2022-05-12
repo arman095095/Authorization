@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Managers
 import AlertManager
 
 protocol EmailRegistrationModuleOutput: AnyObject { }

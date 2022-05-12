@@ -9,7 +9,6 @@
 import UIKit
 import Module
 import Utils
-import Managers
 import AlertManager
 
 typealias LoginEntranceModule = Module<LoginEntranceModuleInput, LoginEntranceModuleOutput>
