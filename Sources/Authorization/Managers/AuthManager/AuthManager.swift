@@ -10,8 +10,9 @@ import Foundation
 import ModelInterfaces
 import Services
 import Managers
+import Swinject
 
-public protocol AuthManagerProtocol: ProfileInfoManagerProtocol {
+public protocol AuthManagerProtocol {
     func register(email: String,
                   password: String,
                   handler: @escaping (Result<Void, Error>) -> Void)
@@ -22,27 +23,28 @@ public protocol AuthManagerProtocol: ProfileInfoManagerProtocol {
 
 public final class AuthManager {
     
-    private var accountID: String?
     private let authService: AuthServiceProtocol
     private let accountService: AccountServiceProtocol
     private let remoteStorageService: RemoteStorageServiceProtocol
     private let profileService: ProfilesServiceProtocol
     private let requestsService: RequestsServiceProtocol
     private let quickAccessManager: QuickAccessManagerProtocol
+    private let container: Container
     
     public init(authService: AuthServiceProtocol,
                 accountService: AccountServiceProtocol,
                 remoteStorage: RemoteStorageServiceProtocol,
                 quickAccessManager: QuickAccessManagerProtocol,
                 profileService: ProfilesServiceProtocol,
-                requestsService: RequestsServiceProtocol) {
+                requestsService: RequestsServiceProtocol,
+                container: Container) {
         self.authService = authService
         self.accountService = accountService
         self.remoteStorageService = remoteStorage
         self.quickAccessManager = quickAccessManager
         self.profileService = profileService
-        self.accountID = quickAccessManager.userID
         self.requestsService = requestsService
+        self.container = container
     }
 }
 
@@ -54,54 +56,10 @@ extension AuthManager: AuthManagerProtocol {
         authService.register(email: email, password: password) { [weak self] result in
             switch result {
             case .success(let userID):
-                self?.accountID = userID
+                self?.register(userID: userID)
                 handler(.success(()))
             case .failure(let error):
                 handler(.failure(error))
-            }
-        }
-    }
-    
-    public func sendProfile(username: String,
-                            info: String,
-                            sex: String,
-                            country: String,
-                            city: String,
-                            birthday: String,
-                            image: Data?,
-                            completion: @escaping (Result<AccountModelProtocol, Error>) -> Void) {
-        guard let accountID = accountID,
-              let image = image else { return }
-        remoteStorageService.uploadProfile(accountID: accountID, image: image) { [weak self] (result) in
-            guard let self = self else { return }
-            switch result {
-            case .success(let url):
-                let profileModel = ProfileNetworkModel(userName: username,
-                                                imageName: url.absoluteString,
-                                                identifier: accountID,
-                                                sex: sex,
-                                                info: info,
-                                                birthDay: birthday,
-                                                country: country,
-                                                city: city)
-                self.accountService.createAccount(accountID: accountID,
-                                                  profile: profileModel) { [weak self] result in
-                    switch result {
-                    case .success:
-                        let profile = ProfileModel(profile: profileModel)
-                        let account = AccountModel(profile: profile,
-                                                   blockedIDs: [],
-                                                   friendIds: [],
-                                                   waitingsIds: [],
-                                                   requestIds: [])
-                        self?.quickAccessManager.userID = accountID
-                        completion(.success((account)))
-                    case .failure(let error):
-                        completion(.failure(error))
-                    }
-                }
-            case .failure(let error):
-                completion(.failure(error))
             }
         }
     }
@@ -110,7 +68,7 @@ extension AuthManager: AuthManagerProtocol {
         authService.login(email: email, password: password) { [weak self] result in
             switch result {
             case .success(let id):
-                self?.accountID = id
+                self?.register(userID: id)
                 self?.profileInfo(accountID: id, handler: handler)
             case .failure(let error):
                 handler(.failure(.another(error: error)))
@@ -121,6 +79,13 @@ extension AuthManager: AuthManagerProtocol {
 }
 
 private extension AuthManager {
+    
+    func register(userID: String) {
+        container.register(String.self, name: "accountID" ,factory: { _ in
+            userID
+        })
+    }
+    
     func profileInfo(accountID: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void) {
         var profile: ProfileModelProtocol?
         var blockedIDs: [String]?

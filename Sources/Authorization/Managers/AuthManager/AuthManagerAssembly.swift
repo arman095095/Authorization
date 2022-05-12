@@ -29,7 +29,7 @@ public final class AuthManagerAssembly: Assembly {
                                quickAccessManager: quickAccessManager,
                                profileService: profileService,
                                requestsService: requestsService)
-        }.implements(ProfileInfoManagerProtocol.self, name: ProfileInfoManagersName.auth.rawValue).inObjectScope(.weak)
+        }.inObjectScope(.weak)
     }
 }
 
