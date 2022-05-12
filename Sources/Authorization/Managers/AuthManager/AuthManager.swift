@@ -12,7 +12,7 @@ import Services
 import Managers
 import Swinject
 
-public protocol AuthManagerProtocol {
+protocol AuthManagerProtocol {
     func register(email: String,
                   password: String,
                   handler: @escaping (Result<Void, Error>) -> Void)
@@ -21,7 +21,7 @@ public protocol AuthManagerProtocol {
                handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void)
 }
 
-public final class AuthManager {
+final class AuthManager {
     
     private let authService: AuthServiceProtocol
     private let accountService: AccountServiceProtocol
@@ -31,13 +31,13 @@ public final class AuthManager {
     private let quickAccessManager: QuickAccessManagerProtocol
     private let container: Container
     
-    public init(authService: AuthServiceProtocol,
-                accountService: AccountServiceProtocol,
-                remoteStorage: RemoteStorageServiceProtocol,
-                quickAccessManager: QuickAccessManagerProtocol,
-                profileService: ProfilesServiceProtocol,
-                requestsService: RequestsServiceProtocol,
-                container: Container) {
+    init(authService: AuthServiceProtocol,
+         accountService: AccountServiceProtocol,
+         remoteStorage: RemoteStorageServiceProtocol,
+         quickAccessManager: QuickAccessManagerProtocol,
+         profileService: ProfilesServiceProtocol,
+         requestsService: RequestsServiceProtocol,
+         container: Container) {
         self.authService = authService
         self.accountService = accountService
         self.remoteStorageService = remoteStorage
@@ -50,7 +50,7 @@ public final class AuthManager {
 
 extension AuthManager: AuthManagerProtocol {
     
-    public func register(email: String,
+    func register(email: String,
                          password: String,
                          handler: @escaping (Result<Void, Error>) -> Void) {
         authService.register(email: email, password: password) { [weak self] result in
@@ -64,7 +64,7 @@ extension AuthManager: AuthManagerProtocol {
         }
     }
     
-    public func login(email: String, password: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void) {
+    func login(email: String, password: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void) {
         authService.login(email: email, password: password) { [weak self] result in
             switch result {
             case .success(let id):
@@ -80,10 +80,13 @@ extension AuthManager: AuthManagerProtocol {
 
 private extension AuthManager {
     
+    enum Names: String {
+        case accountID
+    }
+    
     func register(userID: String) {
-        container.register(String.self, name: "accountID" ,factory: { _ in
-            userID
-        })
+        container.register(String.self,
+                           name: Names.accountID.rawValue) { _ in userID }
     }
     
     func profileInfo(accountID: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void) {
@@ -146,10 +149,10 @@ private extension AuthManager {
         }
         group.notify(queue: .main) {
             guard let profile = profile,
-            let blockedIDs = blockedIDs,
-            let waitingsIDs = waitingsIDs,
-            let requestIDs = requestIDs,
-            let friendIDs = friendIDs else {
+                  let blockedIDs = blockedIDs,
+                  let waitingsIDs = waitingsIDs,
+                  let requestIDs = requestIDs,
+                  let friendIDs = friendIDs else {
                 handler(.failure(.profile(value: .emptyProfile)))
                 return
             }

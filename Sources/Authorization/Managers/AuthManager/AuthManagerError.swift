@@ -7,16 +7,16 @@
 
 import Foundation
 
-public enum AuthManagerError: LocalizedError {
+enum AuthManagerError: LocalizedError {
     
     case another(error: Error)
     case profile(value: Profile)
     
-    public enum Profile {
+    enum Profile {
         case emptyProfile
     }
     
-    public var errorDescription: String? {
+    var errorDescription: String? {
         switch self {
         case .another(let error):
             return error.localizedDescription
