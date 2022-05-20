@@ -25,25 +25,25 @@ final class AuthManager {
     
     private let authService: AuthNetworkServiceProtocol
     private let accountService: AccountServiceProtocol
-    private let remoteStorageService: RemoteStorageServiceProtocol
+    private let remoteStorageService: ProfileRemoteStorageServiceProtocol
     private let profileService: ProfilesServiceProtocol
-    private let requestsService: RequestsServiceProtocol
+    private let accountInfoService: AccountInfoNetworkServiceProtocol
     private let quickAccessManager: QuickAccessManagerProtocol
     private let container: Container
     
     init(authService: AuthNetworkServiceProtocol,
          accountService: AccountServiceProtocol,
-         remoteStorage: RemoteStorageServiceProtocol,
+         remoteStorage: ProfileRemoteStorageServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
          profileService: ProfilesServiceProtocol,
-         requestsService: RequestsServiceProtocol,
+         accountInfoService: AccountInfoNetworkServiceProtocol,
          container: Container) {
         self.authService = authService
         self.accountService = accountService
         self.remoteStorageService = remoteStorage
         self.quickAccessManager = quickAccessManager
         self.profileService = profileService
-        self.requestsService = requestsService
+        self.accountInfoService = accountInfoService
         self.container = container
     }
 }
@@ -118,7 +118,7 @@ private extension AuthManager {
             }
         }
         group.enter()
-        requestsService.waitingIDs(userID: accountID) { result in
+        accountInfoService.waitingIDs(userID: accountID) { result in
             defer { group.leave() }
             switch result {
             case .success(let ids):
@@ -128,7 +128,7 @@ private extension AuthManager {
             }
         }
         group.enter()
-        requestsService.requestIDs(userID: accountID) { result in
+        accountInfoService.requestIDs(userID: accountID) { result in
             defer { group.leave() }
             switch result {
             case .success(let ids):
@@ -138,7 +138,7 @@ private extension AuthManager {
             }
         }
         group.enter()
-        requestsService.friendIDs(userID: accountID) { result in
+        accountInfoService.friendIDs(userID: accountID) { result in
             defer { group.leave() }
             switch result {
             case .success(let ids):
