@@ -14,7 +14,7 @@ final class AuthManagerAssembly: Assembly {
     
     func assemble(container: Container) {
         container.register(AuthManagerProtocol.self) { r in
-            guard let authService = r.resolve(AuthServiceProtocol.self),
+            guard let authService = r.resolve(AuthNetworkServiceProtocol.self),
                   let accountService = r.resolve(AccountServiceProtocol.self),
                   let remoteStorage = r.resolve(RemoteStorageServiceProtocol.self),
                   let quickAccessManager = r.resolve(QuickAccessManagerProtocol.self),

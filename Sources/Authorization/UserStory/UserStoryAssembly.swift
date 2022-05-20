@@ -19,6 +19,7 @@ import UserStoryFacade
 public final class AuthorizationUserStoryAssembly: Assembly {
     public init() { }
     public func assemble(container: Container) {
+        AuthNetworkServiceAssembly().assemble(container: container)
         AuthManagerAssembly().assemble(container: container)
         container.register(AuthorizationRouteMap.self) { r in
             AuthorizationUserStory(container: container)

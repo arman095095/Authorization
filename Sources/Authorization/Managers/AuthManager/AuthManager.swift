@@ -23,7 +23,7 @@ protocol AuthManagerProtocol {
 
 final class AuthManager {
     
-    private let authService: AuthServiceProtocol
+    private let authService: AuthNetworkServiceProtocol
     private let accountService: AccountServiceProtocol
     private let remoteStorageService: RemoteStorageServiceProtocol
     private let profileService: ProfilesServiceProtocol
@@ -31,7 +31,7 @@ final class AuthManager {
     private let quickAccessManager: QuickAccessManagerProtocol
     private let container: Container
     
-    init(authService: AuthServiceProtocol,
+    init(authService: AuthNetworkServiceProtocol,
          accountService: AccountServiceProtocol,
          remoteStorage: RemoteStorageServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
