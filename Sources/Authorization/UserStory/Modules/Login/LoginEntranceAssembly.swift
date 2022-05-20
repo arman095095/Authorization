@@ -14,13 +14,13 @@ import AlertManager
 typealias LoginEntranceModule = Module<LoginEntranceModuleInput, LoginEntranceModuleOutput>
 
 enum LoginEntranceAssembly {
-    static func makeModule(credentionalValidator: CredentionalValidatorProtocol,
-                           authManager: AuthManagerProtocol,
+    static func makeModule(authManager: AuthManagerProtocol,
                            alertManager: AlertManagerProtocol,
                            routeMap: RouteMapPrivate) -> LoginEntranceModule {
         let view = LoginEntranceViewController()
         let router = LoginEntranceRouter(routeMap: routeMap)
-        let interactor = LoginEntranceInteractor(validator: credentionalValidator,
+        let validator = CredentionalValidator()
+        let interactor = LoginEntranceInteractor(validator: validator,
                                                  authManager: authManager)
         let stringFactory = AuthorizationStringFactory()
         let presenter = LoginEntrancePresenter(router: router,

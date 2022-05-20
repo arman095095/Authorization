@@ -60,15 +60,15 @@ extension LoginEntranceInteractor: LoginEntranceInteractorInput {
     func validate(email: String?, password: String?) {
         guard let email = email,
               let password = password else {
-            output?.failureValidated(message: ValidationError.Credentionals.notFilled.localizedDescription)
+            output?.failureValidated(message: CredentionalValidator.Error.notFilled.localizedDescription)
             return
         }
         guard validator.checkEmptyLogin(email: email, password: password) else {
-            output?.failureValidated(message: ValidationError.Credentionals.notFilled.localizedDescription)
+            output?.failureValidated(message: CredentionalValidator.Error.notFilled.localizedDescription)
             return
         }
         guard validator.mailCorrectFormat(email) else {
-            output?.failureValidated(message: ValidationError.Credentionals.invalidEmail.localizedDescription)
+            output?.failureValidated(message: CredentionalValidator.Error.invalidEmail.localizedDescription)
             return
         }
         output?.successValidated(email: email, password: password)
