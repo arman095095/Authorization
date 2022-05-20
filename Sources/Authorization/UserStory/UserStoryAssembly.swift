@@ -19,6 +19,7 @@ import UserStoryFacade
 public final class AuthorizationUserStoryAssembly: Assembly {
     public init() { }
     public func assemble(container: Container) {
+        AccountNetworkServiceAssembly().assemble(container: container)
         AuthNetworkServiceAssembly().assemble(container: container)
         AccountContentNetworkServiceAssembly().assemble(container: container)
         ProfileInfoNetworkServiceAssembly().assemble(container: container)
