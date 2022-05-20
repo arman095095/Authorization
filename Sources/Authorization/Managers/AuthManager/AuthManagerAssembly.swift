@@ -15,11 +15,11 @@ final class AuthManagerAssembly: Assembly {
     func assemble(container: Container) {
         container.register(AuthManagerProtocol.self) { r in
             guard let authService = r.resolve(AuthNetworkServiceProtocol.self),
-                  let accountService = r.resolve(AccountServiceProtocol.self),
+                  let accountService = r.resolve(AccountNetworkServiceProtocol.self),
                   let remoteStorage = r.resolve(ProfileRemoteStorageServiceProtocol.self),
                   let quickAccessManager = r.resolve(QuickAccessManagerProtocol.self),
-                  let accountInfoService = r.resolve(AccountInfoNetworkServiceProtocol.self),
-                  let profileService = r.resolve(ProfilesServiceProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription)
+                  let accountInfoService = r.resolve(AccountContentNetworkServiceProtocol.self),
+                  let profileService = r.resolve(ProfilesNetworkServiceProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription)
             }
             return AuthManager(authService: authService,
                                accountService: accountService,

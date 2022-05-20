@@ -24,19 +24,19 @@ protocol AuthManagerProtocol {
 final class AuthManager {
     
     private let authService: AuthNetworkServiceProtocol
-    private let accountService: AccountServiceProtocol
+    private let accountService: AccountNetworkServiceProtocol
     private let remoteStorageService: ProfileRemoteStorageServiceProtocol
-    private let profileService: ProfilesServiceProtocol
-    private let accountInfoService: AccountInfoNetworkServiceProtocol
+    private let profileService: ProfilesNetworkServiceProtocol
+    private let accountInfoService: AccountContentNetworkServiceProtocol
     private let quickAccessManager: QuickAccessManagerProtocol
     private let container: Container
     
     init(authService: AuthNetworkServiceProtocol,
-         accountService: AccountServiceProtocol,
+         accountService: AccountNetworkServiceProtocol,
          remoteStorage: ProfileRemoteStorageServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
-         profileService: ProfilesServiceProtocol,
-         accountInfoService: AccountInfoNetworkServiceProtocol,
+         profileService: ProfilesNetworkServiceProtocol,
+         accountInfoService: AccountContentNetworkServiceProtocol,
          container: Container) {
         self.authService = authService
         self.accountService = accountService
