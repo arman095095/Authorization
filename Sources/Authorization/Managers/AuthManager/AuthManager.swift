@@ -25,22 +25,19 @@ final class AuthManager {
     
     private let authService: AuthNetworkServiceProtocol
     private let accountService: AccountNetworkServiceProtocol
-    private let remoteStorageService: ProfileRemoteStorageServiceProtocol
-    private let profileService: ProfilesNetworkServiceProtocol
+    private let profileService: ProfileInfoNetworkServiceProtocol
     private let accountInfoService: AccountContentNetworkServiceProtocol
     private let quickAccessManager: QuickAccessManagerProtocol
     private let container: Container
     
     init(authService: AuthNetworkServiceProtocol,
          accountService: AccountNetworkServiceProtocol,
-         remoteStorage: ProfileRemoteStorageServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
-         profileService: ProfilesNetworkServiceProtocol,
+         profileService: ProfileInfoNetworkServiceProtocol,
          accountInfoService: AccountContentNetworkServiceProtocol,
          container: Container) {
         self.authService = authService
         self.accountService = accountService
-        self.remoteStorageService = remoteStorage
         self.quickAccessManager = quickAccessManager
         self.profileService = profileService
         self.accountInfoService = accountInfoService
