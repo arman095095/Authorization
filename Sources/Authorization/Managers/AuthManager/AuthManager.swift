@@ -24,20 +24,17 @@ protocol AuthManagerProtocol {
 final class AuthManager {
     
     private let authService: AuthNetworkServiceProtocol
-    private let accountService: AccountNetworkServiceProtocol
     private let profileService: ProfileInfoNetworkServiceProtocol
     private let accountInfoService: AccountContentNetworkServiceProtocol
     private let quickAccessManager: QuickAccessManagerProtocol
     private let container: Container
     
     init(authService: AuthNetworkServiceProtocol,
-         accountService: AccountNetworkServiceProtocol,
          quickAccessManager: QuickAccessManagerProtocol,
          profileService: ProfileInfoNetworkServiceProtocol,
          accountInfoService: AccountContentNetworkServiceProtocol,
          container: Container) {
         self.authService = authService
-        self.accountService = accountService
         self.quickAccessManager = quickAccessManager
         self.profileService = profileService
         self.accountInfoService = accountInfoService
@@ -105,7 +102,7 @@ private extension AuthManager {
             }
         }
         group.enter()
-        accountService.getBlockedIds(accountID: accountID) { result in
+        accountInfoService.getBlockedIds(userID: accountID) { result in
             defer { group.leave() }
             switch result {
             case .success(let ids):
