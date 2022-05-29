@@ -33,6 +33,10 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 
 extension AuthorizationUserStory: RouteMapPrivate {
 
+    func codeConfirmationModule() -> CodeConfirmationModule {
+        
+    }
+
     func phoneNumberEntranceModule() -> PhoneNumberModule {
         let safeResolver = container.synchronize()
         guard let authManager = safeResolver.resolve(AuthManagerProtocol.self),

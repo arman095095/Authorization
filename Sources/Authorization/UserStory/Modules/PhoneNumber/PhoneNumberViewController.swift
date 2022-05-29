@@ -33,8 +33,10 @@ private extension PhoneNumberViewController {
     func setupViews(stringFactory: PhoneNumberStringFactoryProtocol) {
         view.backgroundColor = .white
         phoneTextField.withFlag = true
-        phoneTextField.withPrefix = true
         phoneTextField.withExamplePlaceholder = true
+        phoneTextField.delegate = self
+        phoneTextField.withPrefix = true
+        phoneTextField.maxDigits = 10
         helloLabel.font = UIFont.avenir26()
         helloLabel.text = stringFactory.greatingTitle
         helloLabel.textAlignment = .center
@@ -76,5 +78,11 @@ extension PhoneNumberViewController: PhoneNumberViewInput {
         setupViews(stringFactory: stringFactory)
         setupConstraints()
         setupActions()
+    }
+}
+
+extension PhoneNumberViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return !(string == "" && range.location == 1)
     }
 }

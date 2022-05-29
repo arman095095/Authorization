@@ -60,6 +60,7 @@ extension PhoneNumberPresenter: PhoneNumberViewOutput {
 extension PhoneNumberPresenter: PhoneNumberInteractorOutput {
     func successVerified() {
         view?.setLoad(on: false)
+        router.openCodeConfirmationModule()
     }
     
     func failureVerify(message: String) {

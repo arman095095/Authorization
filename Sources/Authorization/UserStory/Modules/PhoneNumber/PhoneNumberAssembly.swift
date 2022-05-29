@@ -17,7 +17,7 @@ enum PhoneNumberAssembly {
                            authManager: AuthManagerProtocol,
                            routeMap: RouteMapPrivate) -> PhoneNumberModule {
         let view = PhoneNumberViewController()
-        let router = PhoneNumberRouter()
+        let router = PhoneNumberRouter(routeMap: routeMap)
         let interactor = PhoneNumberInteractor(authManager: authManager)
         let stringFactory = AuthorizationStringFactory()
         let presenter = PhoneNumberPresenter(router: router,
