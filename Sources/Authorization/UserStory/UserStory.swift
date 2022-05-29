@@ -33,6 +33,17 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 
 extension AuthorizationUserStory: RouteMapPrivate {
 
+    func phoneNumberEntranceModule() -> PhoneNumberModule {
+        let safeResolver = container.synchronize()
+        guard let authManager = safeResolver.resolve(AuthManagerProtocol.self),
+              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription) }
+        let module = PhoneNumberAssembly.makeModule(alertManager: alertManager,
+                                                    authManager: authManager,
+                                                    routeMap: self)
+        module.output = outputWrapper
+        return module
+    }
+
     func createProfileModule() -> AccountModule {
         guard let module = container.synchronize().resolve(UserStoryFacadeProtocol.self)?.account?.createAccountModule() else {
             fatalError(ErrorMessage.dependency.localizedDescription)

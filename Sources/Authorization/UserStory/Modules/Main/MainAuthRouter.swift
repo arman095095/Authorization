@@ -12,6 +12,7 @@ import Module
 protocol MainAuthRouterInput: AnyObject {
     func openLoginEntrance()
     func openEmailRegistration()
+    func openPhoneNumberEntrance()
 }
 
 final class MainAuthRouter {
@@ -24,6 +25,11 @@ final class MainAuthRouter {
 }
 
 extension MainAuthRouter: MainAuthRouterInput {
+    func openPhoneNumberEntrance() {
+        let module = routeMap.phoneNumberEntranceModule()
+        self.push(module.view)
+    }
+    
     func openLoginEntrance() {
         let module = routeMap.loginEntranceModule()
         self.push(module.view)

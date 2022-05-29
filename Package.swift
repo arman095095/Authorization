@@ -14,6 +14,7 @@ private let dependencies: [Package.Dependency] = [
     .package(url: "https://github.com/arman095095/AccountRouteMap.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/UserStoryFacade.git", branch: "develop"),
     .package(url: "https://github.com/arman095095/NetworkServices.git", branch: "develop"),
+    .package(url: "https://github.com/marmelroy/PhoneNumberKit.git", from: "3.4.0"),
 ]
 
 let package = Package(
@@ -40,7 +41,8 @@ let package = Package(
                            .product(name: "Swinject", package: "Swinject"),
                            .product(name: "AccountRouteMap", package: "AccountRouteMap"),
                            .product(name: "UserStoryFacade", package: "UserStoryFacade"),
-                           .product(name: "NetworkServices", package: "NetworkServices")
+                           .product(name: "NetworkServices", package: "NetworkServices"),
+                           .product(name: "PhoneNumberKit", package: "PhoneNumberKit")
             ]),
     ]
 )

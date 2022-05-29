@@ -19,6 +19,7 @@ protocol MainAuthModuleInput: AnyObject {
 protocol MainAuthViewOutput: AnyObject {
     func viewDidLoad()
     func login()
+    func phoneNumber()
     func emailRegistration()
 }
 
@@ -50,6 +51,10 @@ extension MainAuthPresenter: MainAuthViewOutput {
     
     func emailRegistration() {
         router.openEmailRegistration()
+    }
+    
+    func phoneNumber() {
+        router.openPhoneNumberEntrance()
     }
 }
 

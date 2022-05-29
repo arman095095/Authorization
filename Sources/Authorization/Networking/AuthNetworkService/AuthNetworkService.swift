@@ -11,7 +11,9 @@ import FirebaseAuth
 import FirebaseFirestore
 import NetworkServices
 
-public protocol AuthNetworkServiceProtocol {
+protocol AuthNetworkServiceProtocol {
+    func phoneNumber(_ number: String, handler: @escaping (Result<String, Error>) -> Void)
+    func codeConfirmation(verificationID: String, code: String, handler: @escaping (Result<String, Error>) -> Void)
     func register(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void)
     func login(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void)
     func signOut(completion: @escaping (Error?) -> ())
@@ -20,14 +22,40 @@ public protocol AuthNetworkServiceProtocol {
 //MARK: Auth
 final class AuthNetworkService {
     private let authNetworkService: Auth
+    private let phoneAuthNetworkService: PhoneAuthProvider
     
-    init(authNetworkService: Auth) {
+    init(authNetworkService: Auth,
+         phoneAuthNetworkService: PhoneAuthProvider) {
         self.authNetworkService = authNetworkService
+        self.phoneAuthNetworkService = phoneAuthNetworkService
     }
 }
 
 extension AuthNetworkService: AuthNetworkServiceProtocol {
-    public func register(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void) {
+    func phoneNumber(_ number: String, handler: @escaping (Result<String, Error>) -> Void) {
+        phoneAuthNetworkService.verifyPhoneNumber(number, uiDelegate: nil) { verificationID, error in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            guard let verificationID = verificationID else { return }
+            handler(.success(verificationID))
+        }
+    }
+    
+    func codeConfirmation(verificationID: String, code: String, handler: @escaping (Result<String, Error>) -> Void) {
+        let credentional = phoneAuthNetworkService.credential(withVerificationID: verificationID, verificationCode: code)
+        authNetworkService.signIn(with: credentional) { (result, error) in
+            if let error = error {
+                handler(.failure(error))
+                return
+            }
+            guard let user = result?.user else { return }
+            handler(.success(user.uid))
+        }
+    }
+    
+     func register(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void) {
         if !InternetConnectionManager.isConnectedToNetwork() {
             handler(.failure(ConnectionError.noInternet))
             return
@@ -42,7 +70,7 @@ extension AuthNetworkService: AuthNetworkServiceProtocol {
         }
     }
     
-    public func login(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void) {
+     func login(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void) {
         if !InternetConnectionManager.isConnectedToNetwork() {
             handler(.failure(ConnectionError.noInternet))
             return
@@ -57,7 +85,7 @@ extension AuthNetworkService: AuthNetworkServiceProtocol {
         }
     }
     
-    public func signOut(completion: @escaping (Error?) -> ()) {
+    func signOut(completion: @escaping (Error?) -> ()) {
         if !InternetConnectionManager.isConnectedToNetwork() {
             completion((ConnectionError.noInternet))
             return

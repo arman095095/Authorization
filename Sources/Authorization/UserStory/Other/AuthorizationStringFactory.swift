@@ -7,7 +7,16 @@
 
 import Foundation
 
+protocol PhoneNumberStringFactoryProtocol {
+    var greatingTitle: String { get }
+    var codeSendButtonTitle: String { get }
+    var phoneNumberLabelTitle: String { get }
+    var emptyNumberMessage: String { get }
+}
+
 protocol MainStringFactoryProtocol {
+    var phoneNumberTitle: String { get }
+    var phoneNumberButtonTitle: String { get }
     var registrationTitle: String { get }
     var alreadyRegisteredTitle: String { get }
     var emailTitle: String { get }
@@ -35,12 +44,18 @@ protocol EmailRegistrationStringFactoryProtocol {
 
 struct AuthorizationStringFactory: EmailRegistrationStringFactoryProtocol,
                                    MainStringFactoryProtocol,
-                                   LoginStringFactoryProtocol {
+                                   LoginStringFactoryProtocol,
+                                   PhoneNumberStringFactoryProtocol {
+    var emptyNumberMessage: String = "Введите корректный номер телефона"
+    var codeSendButtonTitle: String = "Получить код"
+    var phoneNumberLabelTitle: String = "Номер телефона"
     let successAuthorizedMessage = "Вы успешно авторизовались"
     let successRegisteredMessage = "Вы успешно зарегистрировались"
     let successRecoveredMessage = "Профиль успешно восстановлен"
     let registrationTitle = "Зарегистрироваться"
     let alreadyRegisteredTitle = "Уже зарегистрировались?"
+    let phoneNumberTitle = "По номеру телефона"
+    let phoneNumberButtonTitle = "Phone"
     let emailTitle = "E-mail"
     let loginTitle = "Login"
     let logoImageName = "logotip"

@@ -49,3 +49,5 @@ extension RootModuleWrapper: LoginEntranceModuleOutput,
 extension RootModuleWrapper: MainAuthModuleOutput { }
 
 extension RootModuleWrapper: EmailRegistrationModuleOutput { }
+
+extension RootModuleWrapper: PhoneNumberModuleOutput { }

@@ -55,6 +55,8 @@ private extension EmailRegistrationViewController {
     func setupViews(stringFactory: EmailRegistrationStringFactoryProtocol) {
         helloLabel.font = UIFont.avenir26()
         helloLabel.text = stringFactory.greatingTitle
+        helloLabel.textAlignment = .center
+        helloLabel.translatesAutoresizingMaskIntoConstraints = false
         signUpButton.setTitle(stringFactory.registrationTitle, for: .normal)
         emailLabel.text = stringFactory.emailTitle
         passwordLabel.text = stringFactory.passwordTitle
@@ -63,8 +65,6 @@ private extension EmailRegistrationViewController {
         confirmPasswordTextField.isSecureTextEntry = true
         contentView.backgroundColor = .white
         scrollView.backgroundColor = .white
-        helloLabel.textAlignment = .center
-        helloLabel.translatesAutoresizingMaskIntoConstraints = false
         
         let emailView = UIView(textField: emailTextField, label: emailLabel, spacing: 12)
         let passwordView = UIView(textField: passwordTextField, label: passwordLabel, spacing: 12)

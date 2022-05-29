@@ -15,10 +15,12 @@ protocol MainAuthViewInput: AnyObject {
 
 final class MainAuthViewController: UIViewController {
     var output: MainAuthViewOutput?
+    private let phoneLabel = UILabel()
     private let emailLabel = UILabel()
     private let loginLabel = UILabel()
     private let emailButton = ButtonsFactory.blackDefaultButton
     private let loginButton = ButtonsFactory.whiteDefaultButton
+    private let phoneButton = ButtonsFactory.whiteDefaultButton
     private let logo = UIImageView()
     
     override func viewDidLoad() {
@@ -38,17 +40,20 @@ extension MainAuthViewController: MainAuthViewInput {
 private extension MainAuthViewController {
     
     func setupViews(stringFactory: MainStringFactoryProtocol) {
+        phoneLabel.text = stringFactory.phoneNumberTitle
         emailLabel.text = stringFactory.registrationTitle
         loginLabel.text = stringFactory.alreadyRegisteredTitle
         emailButton.setTitle(stringFactory.emailTitle, for: .normal)
         loginButton.setTitle(stringFactory.loginTitle, for: .normal)
+        phoneButton.setTitle(stringFactory.phoneNumberButtonTitle, for: .normal)
         logo.image = UIImage(named: stringFactory.logoImageName, in: Bundle.module, compatibleWith: nil)
         self.view.backgroundColor = .white
         logo.contentMode = .scaleAspectFit
         logo.translatesAutoresizingMaskIntoConstraints = false
         let emailView = UIView(button: emailButton , label: emailLabel, spacing: 20)
         let loginView = UIView(button: loginButton, label: loginLabel, spacing: 20)
-        let authStackView = UIStackView(arrangedSubviews: [logo, emailView, loginView],
+        let phoneView = UIView(button: phoneButton, label: phoneLabel, spacing: 20)
+        let authStackView = UIStackView(arrangedSubviews: [logo, emailView, loginView, phoneView],
                                         spacing: 40,
                                         axis: .vertical)
         view.addSubview(authStackView)
@@ -63,13 +68,18 @@ private extension MainAuthViewController {
     func setupActions() {
         emailButton.addTarget(self, action: #selector(emailTapped), for: .touchUpInside)
         loginButton.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
+        phoneButton.addTarget(self, action: #selector(phoneTapped), for: .touchUpInside)
     }
     
-    @objc private func emailTapped() {
+    @objc func emailTapped() {
         output?.emailRegistration()
     }
     
-    @objc private func loginTapped() {
+    @objc func loginTapped() {
         output?.login()
+    }
+    
+    @objc func phoneTapped() {
+        output?.phoneNumber()
     }
 }

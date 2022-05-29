@@ -12,7 +12,8 @@ import FirebaseAuth
 final class AuthNetworkServiceAssembly: Assembly {
     func assemble(container: Container) {
         container.register(AuthNetworkServiceProtocol.self) { r in
-            AuthNetworkService(authNetworkService: Auth.auth())
-        }
+            AuthNetworkService(authNetworkService: Auth.auth(),
+                               phoneAuthNetworkService: PhoneAuthProvider.provider())
+        }.inObjectScope(.weak)
     }
 }
