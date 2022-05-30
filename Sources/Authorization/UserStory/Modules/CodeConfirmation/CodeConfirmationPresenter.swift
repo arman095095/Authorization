@@ -10,7 +10,7 @@ import UIKit
 import AlertManager
 import ModelInterfaces
 
-struct Constants {
+struct CodeConfirmationConstants {
     static let codeLenth = 6
 }
 
@@ -55,7 +55,7 @@ extension CodeConfirmationPresenter: CodeConfirmationViewOutput {
     
     func confirmAction(with code: String?) {
         guard let code = code,
-              code.count == Constants.codeLenth,
+              code.count == CodeConfirmationConstants.codeLenth,
               let _ = Int(code) else {
             alertManager.present(type: .error, title: stringFactory.incorrectFormatCode)
             return

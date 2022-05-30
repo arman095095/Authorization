@@ -46,14 +46,14 @@ private extension CodeConfirmationViewController {
     func setupViews(stringFactory: CodeConfirmationStringFactoryProtocol) {
         view.backgroundColor = .white
         titleLabel.text = stringFactory.confirmTitle
+        subtitleLabel.text = stringFactory.confirmSubtitle
+        confirmButton.setTitle(stringFactory.confirmButtonTitle, for: .normal)
         view.backgroundColor = .systemGray6
         titleLabel.font = UIFont.avenir26()
         titleLabel.textAlignment = .center
-        subtitleLabel.text = stringFactory.confirmSubtitle
-        confirmButton.setTitle(stringFactory.confirmButtonTitle, for: .normal)
-        let codeView = UIView(textField: codeTextField, label: subtitleLabel, spacing: 12)
         codeTextField.delegate = self
         codeTextField.keyboardType = .numberPad
+        let codeView = UIView(textField: codeTextField, label: subtitleLabel, spacing: 12)
         stackView = UIStackView(arrangedSubviews: [titleLabel, codeView, confirmButton], spacing: 25, axis: .vertical)
         guard let stackView = stackView else { return }
         view.addSubview(stackView)
@@ -78,6 +78,6 @@ private extension CodeConfirmationViewController {
 
 extension CodeConfirmationViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        range.location < Constants.codeLenth
+        range.location < CodeConfirmationConstants.codeLenth
     }
 }
