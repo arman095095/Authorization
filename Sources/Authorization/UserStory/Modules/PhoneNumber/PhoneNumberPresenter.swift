@@ -8,9 +8,10 @@
 
 import UIKit
 import AlertManager
+import ModelInterfaces
 
 protocol PhoneNumberModuleOutput: AnyObject {
-    
+    func userAuthorized(account: AccountModelProtocol)
 }
 
 protocol PhoneNumberModuleInput: AnyObject {
@@ -60,7 +61,7 @@ extension PhoneNumberPresenter: PhoneNumberViewOutput {
 extension PhoneNumberPresenter: PhoneNumberInteractorOutput {
     func successVerified() {
         view?.setLoad(on: false)
-        router.openCodeConfirmationModule()
+        router.openCodeConfirmationModule(output: self)
     }
     
     func failureVerify(message: String) {
@@ -71,4 +72,14 @@ extension PhoneNumberPresenter: PhoneNumberInteractorOutput {
 
 extension PhoneNumberPresenter: PhoneNumberModuleInput {
     
+}
+extension PhoneNumberPresenter: CodeConfirmationModuleOutput {
+    func openAccountCreation() {
+        router.openAccountCreation()
+    }
+    
+    func userAuthorized(account: AccountModelProtocol) {
+        alertManager.present(type: .success, title: stringFactory.successAuthorizedMessage)
+        output?.userAuthorized(account: account)
+    }
 }

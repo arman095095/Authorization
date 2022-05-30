@@ -8,15 +8,21 @@
 
 import UIKit
 import Module
+import AlertManager
 
 typealias CodeConfirmationModule = Module<CodeConfirmationModuleInput, CodeConfirmationModuleOutput>
 
 enum CodeConfirmationAssembly {
-    static func makeModule() -> CodeConfirmationModule {
+    static func makeModule(alertManager: AlertManagerProtocol,
+                           authManager: AuthManagerProtocol) -> CodeConfirmationModule {
         let view = CodeConfirmationViewController()
         let router = CodeConfirmationRouter()
-        let interactor = CodeConfirmationInteractor()
-        let presenter = CodeConfirmationPresenter(router: router, interactor: interactor)
+        let interactor = CodeConfirmationInteractor(authManager: authManager)
+        let stringFactory = AuthorizationStringFactory()
+        let presenter = CodeConfirmationPresenter(router: router,
+                                                  interactor: interactor,
+                                                  stringFactory: stringFactory,
+                                                  alertManager: alertManager)
         view.output = presenter
         interactor.output = presenter
         presenter.view = view

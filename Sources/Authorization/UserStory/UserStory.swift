@@ -33,14 +33,21 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 
 extension AuthorizationUserStory: RouteMapPrivate {
 
-    func codeConfirmationModule() -> CodeConfirmationModule {
-        
+    func codeConfirmationModule(output: CodeConfirmationModuleOutput) -> CodeConfirmationModule {
+        let safeResolver = container.synchronize()
+        guard let authManager = safeResolver.resolve(AuthManagerProtocol.self),
+              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription)
+        }
+        let module = CodeConfirmationAssembly.makeModule(alertManager: alertManager, authManager: authManager)
+        module.output = output
+        return module
     }
 
     func phoneNumberEntranceModule() -> PhoneNumberModule {
         let safeResolver = container.synchronize()
         guard let authManager = safeResolver.resolve(AuthManagerProtocol.self),
-              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription) }
+              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription)
+        }
         let module = PhoneNumberAssembly.makeModule(alertManager: alertManager,
                                                     authManager: authManager,
                                                     routeMap: self)
@@ -59,7 +66,8 @@ extension AuthorizationUserStory: RouteMapPrivate {
     func loginEntranceModule() -> LoginEntranceModule {
         let safeResolver = container.synchronize()
         guard let authManager = safeResolver.resolve(AuthManagerProtocol.self),
-              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription) }
+              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription)
+        }
         let module = LoginEntranceAssembly.makeModule(authManager: authManager,
                                                       alertManager: alertManager,
                                                       routeMap: self)
@@ -70,7 +78,8 @@ extension AuthorizationUserStory: RouteMapPrivate {
     func emailRegistrationModule() -> EmailRegistrationModule {
         let safeResolver = container.synchronize()
         guard let authManager = safeResolver.resolve(AuthManagerProtocol.self),
-              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription) }
+              let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription)
+        }
         let module = EmailRegistrationAssembly.makeModule(authManager: authManager,
                                                           alertManager: alertManager,
                                                           routeMap: self)

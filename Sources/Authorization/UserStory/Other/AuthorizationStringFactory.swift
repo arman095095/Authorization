@@ -12,6 +12,7 @@ protocol PhoneNumberStringFactoryProtocol {
     var codeSendButtonTitle: String { get }
     var phoneNumberLabelTitle: String { get }
     var emptyNumberMessage: String { get }
+    var successAuthorizedMessage: String { get }
 }
 
 protocol MainStringFactoryProtocol {
@@ -42,10 +43,22 @@ protocol EmailRegistrationStringFactoryProtocol {
     var passwordConfirmationTitle: String { get }
 }
 
+protocol CodeConfirmationStringFactoryProtocol {
+    var confirmTitle: String { get }
+    var confirmSubtitle: String { get }
+    var confirmButtonTitle: String { get }
+    var incorrectFormatCode: String { get }
+}
+
 struct AuthorizationStringFactory: EmailRegistrationStringFactoryProtocol,
                                    MainStringFactoryProtocol,
                                    LoginStringFactoryProtocol,
-                                   PhoneNumberStringFactoryProtocol {
+                                   PhoneNumberStringFactoryProtocol,
+                                   CodeConfirmationStringFactoryProtocol {
+    var incorrectFormatCode: String = "Неверный формат ввода"
+    var confirmTitle: String = "Подтверждение"
+    var confirmSubtitle: String = "Введите код из смс"
+    var confirmButtonTitle: String = "Отправить"
     var emptyNumberMessage: String = "Введите корректный номер телефона"
     var codeSendButtonTitle: String = "Получить код"
     var phoneNumberLabelTitle: String = "Номер телефона"

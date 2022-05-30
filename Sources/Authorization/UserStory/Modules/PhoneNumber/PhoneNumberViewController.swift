@@ -40,7 +40,6 @@ private extension PhoneNumberViewController {
         helloLabel.font = UIFont.avenir26()
         helloLabel.text = stringFactory.greatingTitle
         helloLabel.textAlignment = .center
-        helloLabel.translatesAutoresizingMaskIntoConstraints = false
         numberLabel.text = stringFactory.phoneNumberLabelTitle
         sendCodeButton.setTitle(stringFactory.codeSendButtonTitle, for: .normal)
         let phoneNumberView = UIView(textField: phoneTextField, label: numberLabel, spacing: 12)

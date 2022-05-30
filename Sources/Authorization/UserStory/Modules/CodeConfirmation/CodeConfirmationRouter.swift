@@ -9,7 +9,7 @@
 import UIKit
 
 protocol CodeConfirmationRouterInput: AnyObject {
-
+    func dismissModule()
 }
 
 final class CodeConfirmationRouter {
@@ -17,5 +17,7 @@ final class CodeConfirmationRouter {
 }
 
 extension CodeConfirmationRouter: CodeConfirmationRouterInput {
-    
+    func dismissModule() {
+        transitionHandler?.dismiss(animated: true)
+    }
 }

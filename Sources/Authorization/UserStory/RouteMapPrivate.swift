@@ -14,5 +14,5 @@ protocol RouteMapPrivate: AnyObject {
     func mainAuthModule() -> MainAuthModule
     func phoneNumberEntranceModule() -> PhoneNumberModule
     func createProfileModule() -> AccountModule
-    func codeConfirmationModule() -> CodeConfirmationModule
+    func codeConfirmationModule(output: CodeConfirmationModuleOutput) -> CodeConfirmationModule
 }

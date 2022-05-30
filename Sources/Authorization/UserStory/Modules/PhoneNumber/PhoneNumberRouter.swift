@@ -9,7 +9,8 @@
 import UIKit
 
 protocol PhoneNumberRouterInput: AnyObject {
-    func openCodeConfirmationModule()
+    func openCodeConfirmationModule(output: CodeConfirmationModuleOutput)
+    func openAccountCreation()
 }
 
 final class PhoneNumberRouter {
@@ -22,8 +23,13 @@ final class PhoneNumberRouter {
 }
 
 extension PhoneNumberRouter: PhoneNumberRouterInput {
-    func openCodeConfirmationModule() {
-        let module = routeMap.codeConfirmationModule()
+    func openCodeConfirmationModule(output: CodeConfirmationModuleOutput) {
+        let module = routeMap.codeConfirmationModule(output: output)
+        transitionHandler?.present(module.view, animated: true)
+    }
+    
+    func openAccountCreation() {
+        let module = routeMap.createProfileModule()
         transitionHandler?.navigationController?.pushViewController(module.view, animated: true)
     }
 }
