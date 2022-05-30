@@ -16,7 +16,6 @@ protocol AuthNetworkServiceProtocol {
     func codeConfirmation(verificationID: String, code: String, handler: @escaping (Result<String, Error>) -> Void)
     func register(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void)
     func login(email: String, password: String, handler: @escaping (Result<String, Error>) -> Void)
-    func signOut(completion: @escaping (Error?) -> ())
 }
 
 //MARK: Auth
@@ -83,14 +82,5 @@ extension AuthNetworkService: AuthNetworkServiceProtocol {
             guard let user = result?.user else { return }
             handler(.success(user.uid))
         }
-    }
-    
-    func signOut(completion: @escaping (Error?) -> ()) {
-        if !InternetConnectionManager.isConnectedToNetwork() {
-            completion((ConnectionError.noInternet))
-            return
-        }
-        try? self.authNetworkService.signOut()
-        completion(nil)
     }
 }
