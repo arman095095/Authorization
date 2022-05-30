@@ -17,7 +17,7 @@ protocol EmailRegistrationInteractorInput: AnyObject {
 }
 
 protocol EmailRegistrationInteractorOutput: AnyObject {
-    func successRegistered()
+    func successRegistered(userID: String)
     func failureRegistrationRequest(message: String)
     func successValidated(email: String, password: String)
     func failureValidated(message: String)
@@ -68,8 +68,8 @@ extension EmailRegistrationInteractor: EmailRegistrationInteractorInput {
     func requestRegistration(email: String, password: String) {
         authManager.register(email: email, password: password) { [weak self] result in
             switch result {
-            case .success:
-                self?.output?.successRegistered()
+            case .success(let userID):
+                self?.output?.successRegistered(userID: userID)
             case .failure(let error):
                 self?.output?.failureRegistrationRequest(message: error.localizedDescription)
             }

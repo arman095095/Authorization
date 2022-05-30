@@ -18,7 +18,7 @@ protocol LoginEntranceInteractorInput: AnyObject {
 protocol LoginEntranceInteractorOutput: AnyObject {
     func successAuthorized(account: AccountModelProtocol)
     func failureAuthorized(message: String)
-    func responsedEmptyProfile()
+    func responsedEmptyProfile(userID: String)
     func successValidated(email: String, password: String)
     func failureValidated(message: String)
 }
@@ -49,8 +49,8 @@ extension LoginEntranceInteractor: LoginEntranceInteractorInput {
                     self?.output?.failureAuthorized(message: error.localizedDescription)
                 case .profile(value: let value):
                     switch value {
-                    case .emptyProfile:
-                        self?.output?.responsedEmptyProfile()
+                    case .emptyProfile(let userID):
+                        self?.output?.responsedEmptyProfile(userID: userID)
                     }
                 }
             }

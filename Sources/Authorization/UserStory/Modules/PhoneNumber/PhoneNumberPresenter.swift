@@ -75,8 +75,8 @@ extension PhoneNumberPresenter: PhoneNumberModuleInput {
     
 }
 extension PhoneNumberPresenter: CodeConfirmationModuleOutput {
-    func openAccountCreation() {
-        router.openAccountCreation()
+    func openAccountCreation(userID: String) {
+        router.openAccountCreation(userID: userID)
     }
     
     func userAuthorized(account: AccountModelProtocol) {

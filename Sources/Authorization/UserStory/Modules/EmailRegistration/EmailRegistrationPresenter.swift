@@ -63,10 +63,10 @@ extension EmailRegistrationPresenter: EmailRegistrationInteractorOutput {
         alertManager.present(type: .error, title: message)
     }
     
-    func successRegistered() {
+    func successRegistered(userID: String) {
         view?.setLoading(on: false)
         alertManager.present(type: .success, title: stringFactory.successRegisteredMessage)
-        router.openAccountCreation()
+        router.openAccountCreation(userID: userID)
     }
     
     func failureRegistrationRequest(message: String) {

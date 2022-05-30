@@ -10,7 +10,7 @@ import UIKit
 
 protocol PhoneNumberRouterInput: AnyObject {
     func openCodeConfirmationModule(output: CodeConfirmationModuleOutput, context: InputFlowContext)
-    func openAccountCreation()
+    func openAccountCreation(userID: String)
 }
 
 final class PhoneNumberRouter {
@@ -28,8 +28,8 @@ extension PhoneNumberRouter: PhoneNumberRouterInput {
         transitionHandler?.present(module.view, animated: true)
     }
     
-    func openAccountCreation() {
-        let module = routeMap.createProfileModule()
+    func openAccountCreation(userID: String) {
+        let module = routeMap.createProfileModule(userID: userID)
         transitionHandler?.navigationController?.pushViewController(module.view, animated: true)
     }
 }

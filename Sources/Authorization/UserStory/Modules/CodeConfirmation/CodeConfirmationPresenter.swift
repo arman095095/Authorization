@@ -15,7 +15,7 @@ struct CodeConfirmationConstants {
 }
 
 protocol CodeConfirmationModuleOutput: AnyObject {
-    func openAccountCreation()
+    func openAccountCreation(userID: String)
     func userAuthorized(account: AccountModelProtocol)
 }
 
@@ -83,10 +83,10 @@ extension CodeConfirmationPresenter: CodeConfirmationInteractorOutput {
         alertManager.present(type: .error, title: message)
     }
     
-    func responsedEmptyProfile() {
+    func responsedEmptyProfile(userID: String) {
         view?.setLoading(on: false)
         router.dismissModule()
-        output?.openAccountCreation()
+        output?.openAccountCreation(userID: userID)
     }
 }
 

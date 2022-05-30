@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LoginEntranceRouterInput: AnyObject {
-    func openAccountCreation()
+    func openAccountCreation(userID: String)
 }
 
 final class LoginEntranceRouter {
@@ -23,8 +23,8 @@ final class LoginEntranceRouter {
 
 extension LoginEntranceRouter: LoginEntranceRouterInput {
 
-    func openAccountCreation() {
-        let module = routeMap.createProfileModule()
+    func openAccountCreation(userID: String) {
+        let module = routeMap.createProfileModule(userID: userID)
         transitionHandler?.navigationController?.pushViewController(module.view, animated: true)
     }
 }

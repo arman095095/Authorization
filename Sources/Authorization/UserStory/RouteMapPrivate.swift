@@ -13,6 +13,6 @@ protocol RouteMapPrivate: AnyObject {
     func emailRegistrationModule() -> EmailRegistrationModule
     func mainAuthModule() -> MainAuthModule
     func phoneNumberEntranceModule() -> PhoneNumberModule
-    func createProfileModule() -> AccountModule
+    func createProfileModule(userID: String) -> AccountModule
     func codeConfirmationModule(output: CodeConfirmationModuleOutput, context: InputFlowContext) -> CodeConfirmationModule
 }

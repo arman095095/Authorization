@@ -16,7 +16,7 @@ protocol CodeConfirmationInteractorInput: AnyObject {
 protocol CodeConfirmationInteractorOutput: AnyObject {
     func successAuthorized(account: AccountModelProtocol)
     func failureAuthorized(message: String)
-    func responsedEmptyProfile()
+    func responsedEmptyProfile(userID: String)
 }
 
 final class CodeConfirmationInteractor {
@@ -41,8 +41,8 @@ extension CodeConfirmationInteractor: CodeConfirmationInteractorInput {
                     self?.output?.failureAuthorized(message: error.localizedDescription)
                 case .profile(value: let value):
                     switch value {
-                    case .emptyProfile:
-                        self?.output?.responsedEmptyProfile()
+                    case .emptyProfile(let userID):
+                        self?.output?.responsedEmptyProfile(userID: userID)
                     }
                 }
             }

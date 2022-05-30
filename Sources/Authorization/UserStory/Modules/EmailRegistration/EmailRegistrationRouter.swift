@@ -9,7 +9,7 @@
 import UIKit
 
 protocol EmailRegistrationRouterInput: AnyObject {
-    func openAccountCreation()
+    func openAccountCreation(userID: String)
 }
 
 final class EmailRegistrationRouter {
@@ -22,8 +22,8 @@ final class EmailRegistrationRouter {
 }
 
 extension EmailRegistrationRouter: EmailRegistrationRouterInput {
-    func openAccountCreation() {
-        let module = routeMap.createProfileModule()
+    func openAccountCreation(userID: String) {
+        let module = routeMap.createProfileModule(userID: userID)
         transitionHandler?.navigationController?.pushViewController(module.view, animated: true)
     }
 }

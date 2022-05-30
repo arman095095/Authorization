@@ -24,7 +24,6 @@ protocol LoginEntranceViewOutput: AnyObject {
 }
 
 final class LoginEntrancePresenter {
-    
     weak var view: LoginEntranceViewInput?
     weak var output: LoginEntranceModuleOutput?
     private let router: LoginEntranceRouterInput
@@ -63,9 +62,9 @@ extension LoginEntrancePresenter: LoginEntranceInteractorOutput {
         output?.userAuthorized(account: account)
     }
     
-    func responsedEmptyProfile() {
+    func responsedEmptyProfile(userID: String) {
         view?.setLoading(on: false)
-        router.openAccountCreation()
+        router.openAccountCreation(userID: userID)
     }
     
     func failureAuthorized(message: String) {

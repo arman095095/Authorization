@@ -13,7 +13,7 @@ enum AuthManagerError: LocalizedError {
     case profile(value: Profile)
     
     enum Profile {
-        case emptyProfile
+        case emptyProfile(userID: String)
     }
     
     var errorDescription: String? {

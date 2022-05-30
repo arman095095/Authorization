@@ -15,7 +15,7 @@ import Swinject
 protocol AuthManagerProtocol {
     func register(email: String,
                   password: String,
-                  handler: @escaping (Result<Void, Error>) -> Void)
+                  handler: @escaping (Result<String, Error>) -> Void)
     func login(email: String,
                password: String,
                handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void)
@@ -47,7 +47,7 @@ final class AuthManager {
 extension AuthManager: AuthManagerProtocol {
     
     func login(phoneNumber: String, handler: @escaping (Result<String, Error>) -> Void) {
-        authService.phoneNumber(phoneNumber) { [weak self] result in
+        authService.phoneNumber(phoneNumber) { result in
             switch result {
             case .success(let verifyID):
                 handler(.success(verifyID))
@@ -61,7 +61,6 @@ extension AuthManager: AuthManagerProtocol {
         authService.codeConfirmation(verificationID: verifyID, code: code) { [weak self] result in
             switch result {
             case .success(let userID):
-                self?.register(userID: userID)
                 self?.profileInfo(accountID: userID, handler: handler)
             case .failure(let error):
                 handler(.failure(.another(error: error)))
@@ -70,13 +69,12 @@ extension AuthManager: AuthManagerProtocol {
     }
     
     func register(email: String,
-                         password: String,
-                         handler: @escaping (Result<Void, Error>) -> Void) {
-        authService.register(email: email, password: password) { [weak self] result in
+                  password: String,
+                  handler: @escaping (Result<String, Error>) -> Void) {
+        authService.register(email: email, password: password) { result in
             switch result {
             case .success(let userID):
-                self?.register(userID: userID)
-                handler(.success(()))
+                handler(.success(userID))
             case .failure(let error):
                 handler(.failure(error))
             }
@@ -87,7 +85,6 @@ extension AuthManager: AuthManagerProtocol {
         authService.login(email: email, password: password) { [weak self] result in
             switch result {
             case .success(let id):
-                self?.register(userID: id)
                 self?.profileInfo(accountID: id, handler: handler)
             case .failure(let error):
                 handler(.failure(.another(error: error)))
@@ -98,15 +95,6 @@ extension AuthManager: AuthManagerProtocol {
 }
 
 private extension AuthManager {
-    
-    enum Names: String {
-        case accountID
-    }
-    
-    func register(userID: String) {
-        container.register(String.self,
-                           name: Names.accountID.rawValue) { _ in userID }
-    }
     
     func profileInfo(accountID: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void) {
         var profile: ProfileModelProtocol?
@@ -172,7 +160,7 @@ private extension AuthManager {
                   let waitingsIDs = waitingsIDs,
                   let requestIDs = requestIDs,
                   let friendIDs = friendIDs else {
-                handler(.failure(.profile(value: .emptyProfile)))
+                handler(.failure(.profile(value: .emptyProfile(userID: accountID))))
                 return
             }
             let account = AccountModel(profile: profile, blockedIDs: Set(blockedIDs), friendIds: Set(friendIDs), waitingsIds: Set(waitingsIDs), requestIds: Set(requestIDs))
