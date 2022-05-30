@@ -19,8 +19,8 @@ protocol AuthManagerProtocol {
     func login(email: String,
                password: String,
                handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void)
-    func login(phoneNumber: String, handler: @escaping (Result<Void, Error>) -> Void)
-    func codeConfirmation(code: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void)
+    func login(phoneNumber: String, handler: @escaping (Result<String, Error>) -> Void)
+    func codeConfirmation(verifyID: String, code: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void)
 }
 
 final class AuthManager {
@@ -46,20 +46,18 @@ final class AuthManager {
 
 extension AuthManager: AuthManagerProtocol {
     
-    func login(phoneNumber: String, handler: @escaping (Result<Void, Error>) -> Void) {
+    func login(phoneNumber: String, handler: @escaping (Result<String, Error>) -> Void) {
         authService.phoneNumber(phoneNumber) { [weak self] result in
             switch result {
             case .success(let verifyID):
-                self?.register(verifyID: verifyID)
-                handler(.success(()))
+                handler(.success(verifyID))
             case .failure(let error):
                 handler(.failure(error))
             }
         }
     }
     
-    func codeConfirmation(code: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void) {
-        guard let verifyID = container.synchronize().resolve(String.self, name: Names.verifyID.rawValue) else { return }
+    func codeConfirmation(verifyID: String, code: String, handler: @escaping (Result<AccountModelProtocol, AuthManagerError>) -> Void) {
         authService.codeConfirmation(verificationID: verifyID, code: code) { [weak self] result in
             switch result {
             case .success(let userID):
@@ -103,12 +101,6 @@ private extension AuthManager {
     
     enum Names: String {
         case accountID
-        case verifyID
-    }
-    
-    func register(verifyID: String) {
-        container.register(String.self,
-                           name: Names.verifyID.rawValue) { _ in verifyID }
     }
     
     func register(userID: String) {

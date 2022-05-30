@@ -33,6 +33,7 @@ final class CodeConfirmationPresenter {
     weak var view: CodeConfirmationViewInput?
     weak var output: CodeConfirmationModuleOutput?
     private let router: CodeConfirmationRouterInput
+    private let context: InputFlowContext
     private let stringFactory: CodeConfirmationStringFactoryProtocol
     private let alertManager: AlertManagerProtocol
     private let interactor: CodeConfirmationInteractorInput
@@ -40,11 +41,13 @@ final class CodeConfirmationPresenter {
     init(router: CodeConfirmationRouterInput,
          interactor: CodeConfirmationInteractorInput,
          stringFactory: CodeConfirmationStringFactoryProtocol,
-         alertManager: AlertManagerProtocol) {
+         alertManager: AlertManagerProtocol,
+         context: InputFlowContext) {
         self.router = router
         self.interactor = interactor
         self.stringFactory = stringFactory
         self.alertManager = alertManager
+        self.context = context
     }
 }
 
@@ -61,7 +64,10 @@ extension CodeConfirmationPresenter: CodeConfirmationViewOutput {
             return
         }
         view?.setLoading(on: true)
-        interactor.sendCode(code)
+        switch context {
+        case .phone(verifyID: let verifyID):
+            interactor.sendCode(code, verifyID: verifyID)
+        }
     }
 }
 

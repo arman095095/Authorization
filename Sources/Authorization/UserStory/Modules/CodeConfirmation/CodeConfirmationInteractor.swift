@@ -10,7 +10,7 @@ import UIKit
 import ModelInterfaces
 
 protocol CodeConfirmationInteractorInput: AnyObject {
-    func sendCode(_ code: String)
+    func sendCode(_ code: String, verifyID: String)
 }
 
 protocol CodeConfirmationInteractorOutput: AnyObject {
@@ -30,8 +30,8 @@ final class CodeConfirmationInteractor {
 }
 
 extension CodeConfirmationInteractor: CodeConfirmationInteractorInput {
-    func sendCode(_ code: String) {
-        authManager.codeConfirmation(code: code) { [weak self] result in
+    func sendCode(_ code: String, verifyID: String) {
+        authManager.codeConfirmation(verifyID: verifyID, code: code) { [weak self] result in
             switch result {
             case .success(let account):
                 self?.output?.successAuthorized(account: account)

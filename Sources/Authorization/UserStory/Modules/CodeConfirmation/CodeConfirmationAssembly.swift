@@ -14,7 +14,8 @@ typealias CodeConfirmationModule = Module<CodeConfirmationModuleInput, CodeConfi
 
 enum CodeConfirmationAssembly {
     static func makeModule(alertManager: AlertManagerProtocol,
-                           authManager: AuthManagerProtocol) -> CodeConfirmationModule {
+                           authManager: AuthManagerProtocol,
+                           context: InputFlowContext) -> CodeConfirmationModule {
         let view = CodeConfirmationViewController()
         let router = CodeConfirmationRouter()
         let interactor = CodeConfirmationInteractor(authManager: authManager)
@@ -22,7 +23,8 @@ enum CodeConfirmationAssembly {
         let presenter = CodeConfirmationPresenter(router: router,
                                                   interactor: interactor,
                                                   stringFactory: stringFactory,
-                                                  alertManager: alertManager)
+                                                  alertManager: alertManager,
+                                                  context: context)
         view.output = presenter
         interactor.output = presenter
         presenter.view = view

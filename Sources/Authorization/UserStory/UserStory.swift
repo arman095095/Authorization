@@ -33,12 +33,14 @@ extension AuthorizationUserStory: AuthorizationRouteMap {
 
 extension AuthorizationUserStory: RouteMapPrivate {
 
-    func codeConfirmationModule(output: CodeConfirmationModuleOutput) -> CodeConfirmationModule {
+    func codeConfirmationModule(output: CodeConfirmationModuleOutput, context: InputFlowContext) -> CodeConfirmationModule {
         let safeResolver = container.synchronize()
         guard let authManager = safeResolver.resolve(AuthManagerProtocol.self),
               let alertManager = safeResolver.resolve(AlertManagerProtocol.self) else { fatalError(ErrorMessage.dependency.localizedDescription)
         }
-        let module = CodeConfirmationAssembly.makeModule(alertManager: alertManager, authManager: authManager)
+        let module = CodeConfirmationAssembly.makeModule(alertManager: alertManager,
+                                                         authManager: authManager,
+                                                         context: context)
         module.output = output
         return module
     }

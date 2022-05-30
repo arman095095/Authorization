@@ -59,9 +59,10 @@ extension PhoneNumberPresenter: PhoneNumberViewOutput {
 }
 
 extension PhoneNumberPresenter: PhoneNumberInteractorOutput {
-    func successVerified() {
+    func successVerified(verifyID: String) {
         view?.setLoad(on: false)
-        router.openCodeConfirmationModule(output: self)
+        let context = InputFlowContext.phone(verifyID: verifyID)
+        router.openCodeConfirmationModule(output: self, context: context)
     }
     
     func failureVerify(message: String) {

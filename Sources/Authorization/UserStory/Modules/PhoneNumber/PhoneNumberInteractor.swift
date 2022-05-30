@@ -13,7 +13,7 @@ protocol PhoneNumberInteractorInput: AnyObject {
 }
 
 protocol PhoneNumberInteractorOutput: AnyObject {
-    func successVerified()
+    func successVerified(verifyID: String)
     func failureVerify(message: String)
 }
 
@@ -31,8 +31,8 @@ extension PhoneNumberInteractor: PhoneNumberInteractorInput {
     func verify(for number: String) {
         authManager.login(phoneNumber: number) { [weak self] result in
             switch result {
-            case .success():
-                self?.output?.successVerified()
+            case .success(let verifyID):
+                self?.output?.successVerified(verifyID: verifyID)
             case .failure(let error):
                 self?.output?.failureVerify(message: error.localizedDescription)
             }
